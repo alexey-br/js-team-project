@@ -1,23 +1,24 @@
 import TMDB_Service from './TMDB-Service';
 import createMoviesMarkup from './movies-markup';
+import refs from './refs';
 
-const refs = {
-  searchForm: document.querySelector('[data-search]'),
-  moviesContainer: document.querySelector('[data-movies]'),
-  paginationContainer: document.querySelector('[data-pages]'),
-  movieModal: document.querySelector('[data-movie-modal]'),
-  movieModalCloseBtn: document.querySelector('[data-movie-modal-close]'),
-  movieDetails: document.querySelector('[data-movie-details]'),
-  movieDetails: document.querySelector('[data-movie-details]'),
-  moviesQueueContainer: document.querySelector('[data-movies-queue]'),
-  moviesQueuePagination: document.querySelector(
-    '[data-movies-queue-pagination]'
-  ),
-  watchedMoviesContainer: document.querySelector('[data-watched-movies]'),
-  watchedMoviesPagination: document.querySelector(
-    '[data-watched-movies-pagination]'
-  ),
-};
+// const refs = {
+//   searchForm: document.querySelector('[data-search]'),
+//   moviesContainer: document.querySelector('[data-movies]'),
+//   paginationContainer: document.querySelector('[data-pages]'),
+//   movieModal: document.querySelector('[data-movie-modal]'),
+//   movieModalCloseBtn: document.querySelector('[data-movie-modal-close]'),
+//   movieDetails: document.querySelector('[data-movie-details]'),
+//   movieDetails: document.querySelector('[data-movie-details]'),
+//   moviesQueueContainer: document.querySelector('[data-movies-queue]'),
+//   moviesQueuePagination: document.querySelector(
+//     '[data-movies-queue-pagination]'
+//   ),
+//   watchedMoviesContainer: document.querySelector('[data-watched-movies]'),
+//   watchedMoviesPagination: document.querySelector(
+//     '[data-watched-movies-pagination]'
+//   ),
+// };
 
 refs.searchForm.addEventListener('submit', onSearch);
 refs.paginationContainer.addEventListener('click', onPaginationClick);
