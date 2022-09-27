@@ -5,5 +5,5 @@ import './js/onButtonClick';
 import './js/openModalFilm';
 import './js/settings';
 import './js/trailer';
-
+import './js/team';
 
