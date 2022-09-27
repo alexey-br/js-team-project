@@ -1,17 +1,52 @@
-<form data-search>
-  <input type="text" name="searchQuery" />
-  <button type="submit">Search</button>
-</form>
 <div data-pages>
   <!-- <button class="current"  data-page=""></button> -->
 </div>
-<ul class="movies-list" data-movies>
+<ul class="tmp-movies-list" data-movies>
   <!-- <li>
       <img src="./images/default-poster.jpg" alt="" />
       <p></p>
       <p><span></span><span></span><span></span></p>
     </li> -->
 </ul>
-<div data-pages>
-  <!-- <button class="current"  data-page=""></button> -->
+<section class="visually-hidden">
+  <h1>MOVIES QUEUE</h1>
+  <ul class="tmp-movies-list" data-movies-queue></ul>
+  <div data-movies-queue-pagination></div>
+</section>
+<section class="visually-hidden">
+  <h1>WATCHED MOVIES</h1>
+  <ul class="tmp-movies-list" data-watched-movies></ul>
+  <div data-watched-movies-pagination></div>
+</section>
+<!-- модальное окно -->
+<div class="tmp-backdrop tmp-backdrop--is-hidden" data-movie-modal>
+  <div class="tmp-backdrop__modal">
+    <button
+      type="button"
+      class="tmp-backdrop__modal-close"
+      data-movie-modal-close
+    ></button>
+    <div class="tmp-movie-modal" data-movie-details>
+      <!-- <div>
+        <img
+          src="./images/default-poster.jpg"
+          alt="default poster"
+          data-movie-modal-poster
+        />
+      </div>
+      <div>
+        <div >
+          <h2></h2>
+          <p>Vote / Votes -</p>
+          <p>Popularity -</p>
+          <p>Original Title -</p>
+          <p>Genre -</p>
+          <h3>About</h3>
+          <p>...</p>
+        </div>
+        <button data-wathed>ADD TO WATCHED</button>
+        <button data-queue>ADD TO QUEUE</button>
+      </div> -->
+    </div>
+  </div>
 </div>

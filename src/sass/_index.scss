@@ -1,13 +1,17 @@
+@import '../../node_modules/modern-normalize/modern-normalize.css';
+
 @import './variables';
-@import './base.scss';
+@import './base';
 @import './common';
 @import './example';
 
-@import './header.scss';
-@import './library-header.scss';
-@import './all-movies.scss';
-@import './library-movies.scss';
-@import './pagination.scss';
-@import './footer.scss';
-@import './movie-modal.scss';
-@import './our-team-modal.scss';
+@import './styles';
+
+@import './header';
+@import './library-header';
+@import './all-movies';
+@import './library-movies';
+@import './pagination';
+@import './footer';
+@import './movie-modal';
+@import './our-team-modal';
