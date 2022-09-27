@@ -18,6 +18,7 @@
     "url": "https://github.com/alexey-br/js-team-project/issues"
   },
   "dependencies": {
+    "basiclightbox": "^5.0.4",
     "axios": "^0.27.2",
     "modern-normalize": "^1.1.0"
   },

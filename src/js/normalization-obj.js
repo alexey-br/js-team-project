@@ -1,7 +1,7 @@
 import genreList from "./genreList";
 import settings from "./settings";
 const { IMG_URL } = settings;
-import noImg from "../../images/noImageAvailable.jpg";
+import noImg from "../images/noImageAvailable.jpg";
 
 const getGenreArray = genre_ids => genre_ids.map(el => genreList[`${el}`]);
 
