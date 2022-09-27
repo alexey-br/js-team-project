@@ -1,2 +1,2 @@
-import './js/fetch-all-movies';
-import './js/team';
+import './js/fetch-movies';
+//import './js/team';
