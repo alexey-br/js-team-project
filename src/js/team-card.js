@@ -76,12 +76,4 @@ export const teamCards = [
         role: 'developer',
         tasks: 'Зверстано хедер головної сторінки, реалізований перехід на головну сторінку та відображення бібліотеки коистувача',
     },
-    {
-        photo: 'https://ca.slack-edge.com/T03L32N8Q9X-U03LJ9R18G0-030575b0879f-512',
-        name: 'Наталія',
-        surname: '',
-        role: 'developer',
-        tasks: '',
-    },
-
 ]
