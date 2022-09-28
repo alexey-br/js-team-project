@@ -14,27 +14,33 @@ export default function paginationMarkup(currentPage, totalPages) {
 
   let pages = '';
   for (let i = minPage; i <= maxPage; i += 1) {
-    const btnClass = i === currentPage ? 'class="current-page"' : '';
-    pages += `<button ${btnClass} data-page="${i}">${i}</button>`;
+    const btnClass =
+      i === currentPage ? 'class="pagination-btn current-page"' : '';
+    pages += `<button ${btnClass} data-page="${i}" class="pagination-btn">${i}</button>`;
   }
 
-  const firstPage = minPage > 1 ? `<button data-page="1">1_</button>` : '';
+  const firstPage =
+    minPage > 1
+      ? `<button data-page="1" class="pagination-btn">1</button>`
+      : '';
   const lastPage =
     maxPage < totalPages
-      ? `<button data-page="${totalPages}">_${totalPages}</button>`
+      ? `<button data-page="${totalPages}" class="pagination-btn">${totalPages}</button>`
       : '';
 
-  const firstSeparator = minPage > 2 ? '<span>...</span>' : '';
-  const lastSeparator = maxPage < totalPages - 1 ? '<span>...</span>' : '';
+  const firstSeparator =
+    minPage > 2 ? '<span class="pagination-btn">...</span>' : '';
+  const lastSeparator =
+    maxPage < totalPages - 1 ? '<span class="pagination-btn">...</span>' : '';
 
   const goBackBtn =
     currentPage === 1
-      ? `<button disabled><span>back</span></button>`
-      : `<button data-page-step="-1"><span>back</span></button>`;
+      ? `<button disabled class="pagination-btn disabled"><span>&#129144;</span></button>`
+      : `<button data-page-step="-1" class="pagination-btn grey-light"><span>&#129144;</span></button>`;
   const goForwardBtn =
     currentPage === totalPages
-      ? `<button disabled><span>forward</span></button>`
-      : `<button data-page-step="1"><span>forward</span></button>`;
+      ? `<button disabled class="pagination-btn"><span>&#129146;</span></button>`
+      : `<button data-page-step="1" class="pagination-btn grey-light"><span>&#129146;</span></button>`;
 
   return (
     goBackBtn +
