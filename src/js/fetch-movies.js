@@ -37,10 +37,11 @@ async function getMovies() {
 }
 
 async function onMovieCardClick(e) {
-  if (e.target.tagName !== 'IMG') return;
+  const targetEl = e.target.closest('li');
+  if (!targetEl) return;
 
   try {
-    const movieId = Number(e.target.dataset.movieId);
+    const movieId = Number(targetEl.dataset.movieId);
     const movieData = await tmdbService.fetchMovie(movieId);
 
     renderModal(movieData);
@@ -57,7 +58,7 @@ function renderModal({
   title,
   original_title,
   vote_average,
-  votes,
+  vote_count,
   popularity,
   genres,
   overview,
@@ -99,7 +100,7 @@ function renderModal({
           <ul class="modal__rating-right-list">
             <li class="modal__rating-right-item">
               <span class="modal__rating-right-item--color">${vote_average}</span> /
-              <span class="modal__rating-right-item--shadow">${votes}</span>
+              <span class="modal__rating-right-item--shadow">${vote_count}</span>
             </li>
             <li class="modal__rating-right-item">${popularity}</li>
             <li class="modal__rating-right-item modal__rating-right-item--uppercase">${original_title}</li>

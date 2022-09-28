@@ -11,8 +11,8 @@ export default function createMoviesMarkup(moviesData) {
       : './default-poster.jpg';
 
     return `${acc}
-      <li class="card__film">
-        <img class="card__img"src="${poster}" alt="${title} movie poster" data-movie-id="${id}" >
+      <li class="card__film"  data-movie-id="${id}">
+        <img class="card__img"src="${poster}" alt="${title} movie poster" >
         <div class="card__info">
         <h2 class="card__title">${title}</h2>
         <p class="card__text">
