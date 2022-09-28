@@ -194,6 +194,24 @@
   border: none;
   outline: none;
 }
+.nav__auth {
+  margin-left: 24px;
+}
+
+.modal-open-btn{
+  background-color: transparent;
+  border: none;
+}
+
+.modal-open-btn__icon{
+  fill:#ffffff;
+   
+  &:hover,
+  &:focus {
+    fill: #ff6b01;
+  }
+}
+
 
 .warning__message {
   margin: 20px auto 0;
