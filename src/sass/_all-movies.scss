@@ -5,14 +5,13 @@
 }
 
 .card__info {
-  padding: 5px;
+  padding: 8px 2px;
 }
 
 .card__film {
   border-radius: 5px;
   width: 280px;
   min-height: 440px;
-  //   padding: 5px;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -22,16 +21,15 @@
 
 .card__film:hover,
 .card__film:focus {
-  transform: scale(1.01);
+  transform: scale(1.04);
   transition: all 0.5s;
-  box-shadow: 2px 0px 21px 15px rgba(238, 211, 152, 0.75);
+  box-shadow: 3px 0px 21px 15px rgba(238, 211, 152, 0.75);
 }
 
 .card__img {
   width: 100%;
   border-radius: 5px;
   height: 398px;
-  margin-bottom: 8px;
   object-fit: cover;
 }
 
@@ -41,12 +39,6 @@
   font-family: 'Roboto';
   text-transform: uppercase;
   color: #000000;
-
-  @media screen and (min-width: 1200px) {
-    font-size: 18px;
-    line-height: 1.2;
-    margin-bottom: 6px;
-  }
 }
 
 .card__text {
@@ -61,10 +53,6 @@
   align-items: center;
   justify-content: flex-start;
 
-  @media screen and (min-width: 1200px) {
-    font-size: 18px;
-    line-height: 1.2;
-  }
 }
 
 .card__genre::after {
