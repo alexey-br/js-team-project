@@ -4,7 +4,7 @@ export const teamCards = [
         name: 'Олексій',
         surname: 'Бражник',
         role: 'Team-lead',
-        tasks: 'Реалізовано підвантаження популярних фільмів та відображення відповідної частини фільмів при переході на кожну сторінку',
+        tasks: 'Реалізовано підвантаження популярних фільмів та відображення частини фільмів при переході на кожну сторінку',
     },
     {
         photo: 'https://ca.slack-edge.com/T03L32N8Q9X-U03L40ET9TL-98a068e6dd7b-512',
@@ -14,14 +14,14 @@ export const teamCards = [
         tasks: 'Реалізовано модальне вікно "GoIT Students"',
     },
     {
-        photo: 'https://ca.slack-edge.com/T03L32N8Q9X-U03KPC2S5HV-b2f189a402b2-512',
+        photo: 'https://ca.slack-edge.com/T03L32N8Q9X-U03KPC2S5HV-0d7689a89f3e-512',
         name: 'Сілард',
         surname: 'Гудан',
         role: 'Developer',
         tasks: 'Зверстано шаблон модалки одного фільму',
     },
     {
-        photo: 'https://ca.slack-edge.com/T03L32N8Q9X-U03LTNKNLHW-bef111e080b1-512',
+        photo: 'https://ca.slack-edge.com/T03L32N8Q9X-U03LTNKNLHW-558df94a59cd-512',
         name: 'Олександр',
         surname: 'Веклинець',
         role: 'Developer',
@@ -74,7 +74,7 @@ export const teamCards = [
         name: 'Юрій',
         surname: 'Дуда',
         role: 'Developer',
-        tasks: 'Зверстано хедер головної сторінки, реалізований перехід на головну сторінку та відображення бібліотеки користувача',
+        tasks: 'Зверстано хедер головної сторінки, реалізований перехід на неї та відображення бібліотеки користувача',
     },
     {
         photo: 'https://ca.slack-edge.com/T03L32N8Q9X-U03LBS6P0SW-c93fd144d979-512',
