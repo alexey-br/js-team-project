@@ -11,10 +11,15 @@ export default function createMoviesMarkup(moviesData) {
       : './default-poster.jpg';
 
     return `${acc}
-      <li>
-        <img src="${poster}" alt="${title} movie poster" data-movie-id="${id}" style="width: 200px">
-        <p>${title}</p>
-        <p><span>${genresList}</span><span>${release_date}</span><span>${vote_average}</span></p>
+      <li class="card__film">
+        <img class="card__img"src="${poster}" alt="${title} movie poster" data-movie-id="${id}" >
+        <div class="card__info">
+        <h2 class="card__title">${title}</h2>
+        <p class="card__text">
+        <span class="card__genre">${genresList}</span>
+        <span class="card__release">${release_date}</span><span class="card__rating   ">${vote_average}</span>
+        </p>
+        </div>
       </li>
       `;
   }, '');
