@@ -11,7 +11,6 @@ refs.paginationContainer.addEventListener('click', onPaginationClick);
 refs.moviesContainer.addEventListener('click', onMovieCardClick);
 refs.moviesQueueContainer.addEventListener('click', onMovieCardClick);
 refs.watchedMoviesContainer.addEventListener('click', onMovieCardClick);
-// refs.movieModalCloseBtn.addEventListener('click', closeMovieModal);
 refs.watchedMoviesPagination.addEventListener(
   'click',
   onWatchedMoviesPaginationClick
@@ -63,7 +62,9 @@ function renderModal({
   genres,
   overview,
   poster_path,
+  release_date,
 }) {
+
   const BASE_URL = 'http://image.tmdb.org/t/p/';
   const movieGenres = genres.map(genre => genre.name).join(', ');
   const poster = poster_path
@@ -77,7 +78,7 @@ function renderModal({
       <div class="modal__close-first"></div>
       <div class="modal__close-second"></div>
     </div>
-    <div class="modal-wrap">
+    <div class="modal-wrap" data-movie-details>
       <div class="modal__picture-wrap">
         <img
         class="modal__picture"
@@ -114,8 +115,8 @@ function renderModal({
           </p>
         </div>
         <div class="modal__button-wrap" data-id="${id}">
-          <button class="modal__button btn-watch">add to watched</button>
-          <button class="modal__button btn-queue">add to queue</button>
+          <button class="modal__button btn-watch" data-watched>add to watched</button>
+          <button class="modal__button btn-queue" data-queue>add to queue</button>
         </div>
       </div>
     </div>
@@ -126,12 +127,17 @@ function renderModal({
         window.addEventListener('keydown', escapeKeyCloseModal);
         window.addEventListener('click', clickForCloseModal);
         modal.element().querySelector('.modal__close').onclick = modal.close;
+        document.body.classList.toggle('modal-open');
       },
       onClose: modal => {
         window.removeEventListener('keydown', escapeKeyCloseModal);
         window.removeEventListener('click', clickForCloseModal);
+        document.body.classList.toggle('modal-open');
       },
     }
+
+ 
+
   );
 
   function escapeKeyCloseModal(event) {
@@ -152,6 +158,23 @@ function renderModal({
   modal.show();
   // textContentWatched(id);
   // textContentQueue(id);
+
+    refs.movieDetails = document.querySelector('[data-movie-details]');
+    refs.movieDetails.movieData = {
+    id,
+    genres,
+    poster_path,
+    release_date,
+    title,
+    vote_average,
+  };
+
+  const addToWatchedBtnRef = document.querySelector('[data-watched]');
+  const addToQueueBtnRef = document.querySelector('[data-queue]');
+
+  addToWatchedBtnRef.addEventListener('click', addToWatched);
+  addToQueueBtnRef.addEventListener('click', addToQueue);
+
 }
 
 // async function onClickCard(e) {
@@ -205,13 +228,13 @@ function renderMovieModal(movieData) {
   addToQueueBtnRef.addEventListener('click', addToQueue, { once: true });
 }
 
-function openMovieModal() {
-  refs.movieModal.classList.remove('tmp-backdrop--is-hidden');
-}
+// function openMovieModal() {
+//   refs.movieModal.classList.remove('tmp-backdrop--is-hidden');
+// }
 
-function closeMovieModal() {
-  refs.movieModal.classList.add('tmp-backdrop--is-hidden');
-}
+// function closeMovieModal() {
+//   refs.movieModal.classList.add('tmp-backdrop--is-hidden');
+// }
 
 function renderMovies(moviesData) {
   const updatedMoviesData = updateMovieGeneres(
@@ -268,14 +291,12 @@ function addToWatched(e) {
   removeMovieFromList(movieData.id, 'queueForWatch');
   updateMoviesQueue();
   updateWatchedMovies();
-  closeMovieModal();
 }
 
 function addToQueue(e) {
   const { movieData } = refs.movieDetails;
   addMovieToList(movieData, 'queueForWatch');
   updateMoviesQueue();
-  closeMovieModal();
 }
 
 function addMovieToList(movieData, listName) {

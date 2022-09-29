@@ -8,8 +8,7 @@ const refs = {
   paginationContainer: document.querySelector('[data-pages]'),
   movieModal: document.querySelector('[data-movie-modal]'),
   movieModalCloseBtn: document.querySelector('[data-movie-modal-close]'),
-  movieDetails: document.querySelector('[data-movie-details]'),
-  movieDetails: document.querySelector('[data-movie-details]'),
+  // movieDetails: document.querySelector('[data-movie-details]'),
   moviesQueueContainer: document.querySelector('[data-movies-queue]'),
   moviesQueuePagination: document.querySelector(
     '[data-movies-queue-pagination]'
