@@ -11,9 +11,9 @@ document.body.onload = function () {
 
 // export const spinnerMethod = {
 //   removeSpinner: function () {
-//     setTimeout(preloader.classList.add('done'), 500);
+//         setTimeout(preloader.classList.add('done'), 500);
 //   },
 //   addSpinner: function () {
-//     preloader.classList.remove('done');
+//         preloader.classList.remove('done');
 //   },
 // };

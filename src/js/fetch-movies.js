@@ -261,6 +261,7 @@ function onSearch(e) {
   tmdbService.query = newQuery.trim();
   tmdbService.resetPage();
   getMovies();
+  
 }
 
 function addToWatched(e) {
