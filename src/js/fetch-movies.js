@@ -6,6 +6,7 @@ import paginationMarkup from '../templates/pagination-markup';
 import createMovieDetailsMarkup from '../templates/movie-details-markup';
 import refs from './refs';
 
+
 refs.searchForm.addEventListener('submit', onSearch);
 refs.paginationContainer.addEventListener('click', onPaginationClick);
 refs.moviesContainer.addEventListener('click', onMovieCardClick);
@@ -283,6 +284,7 @@ function onSearch(e) {
   tmdbService.query = newQuery.trim();
   tmdbService.resetPage();
   getMovies();
+  
 }
 
 function addToWatched(e) {
