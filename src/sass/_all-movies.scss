@@ -25,7 +25,7 @@
 }
 
 .card__info {
-  padding: 8px 2px;
+  padding: 2px;
 }
 
 .card__film {
@@ -44,14 +44,14 @@
     flex-basis: calc(100% / 3 - 16px);
   }
 
-  transition: 0.5s linear;
+  transition: 500ms linear;
 }
 
 .card__film:hover,
 .card__film:focus {
   transform: scale(1.04);
-  transition: all 0.5s;
-  box-shadow: 3px 0px 21px 15px rgba(238, 211, 152, 0.75);
+  transition: all 500ms;
+  box-shadow: 2px 0px 21px 6px rgba(238, 211, 152, 0.75);
 }
 
 .card__img {
@@ -77,29 +77,38 @@
 .card__title {
   font-size: 12px;
   line-height: 1.33;
-  font-family: 'Roboto';
+  font-weight: 500;
   text-transform: uppercase;
-  color: #000000;
+  color: var(--primery-text-color);
+
+  @media screen and (min-width: 1280px) {
+    font-size: 20px;
+    line-height: 1.2;
+  }
 }
 
 .card__text {
-  font-family: 'Roboto';
   font-weight: 500;
   font-size: 12px;
   line-height: 1.33;
-  color: #ff6b08;
+  color: var(--accent-color);
 
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-start;
+
+  @media screen and (min-width: 1280px) {
+    font-size: 20px;
+    line-height: 1.2;
+  }
 }
 
 .card__genre::after {
   content: '';
   width: 12px;
   height: 0;
-  border: 1px solid #ff6b08;
+  border: 1px solid var(--accent-color);
   transform: rotate(90deg);
   margin-left: 4px;
   margin-right: 4px;
@@ -110,13 +119,13 @@
 }
 
 .card__rating {
-  border: 1px solid #ff6b08;
+  border: 1px solid var(--accent-color);
   border-radius: 5px;
-  min-width: 36px;
+  width: 36px;
   height: 16px;
-  padding: 1px 6px;
-  background-color: #ff6b08;
-  color: #ffffff;
+  padding: 1px 9px;
+  background-color: var(--accent-color);
+  color: var(--secondary-text-color);
 
   font-weight: 500;
   font-size: 12px;
@@ -127,4 +136,10 @@
   align-items: center;
   text-align: center;
   text-transform: uppercase;
+
+  @media screen and (min-width: 1280px) {
+    width: 40px;
+    height: 20px;
+    padding: 3px 11px;
+  }
 }
