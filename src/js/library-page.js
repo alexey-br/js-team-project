@@ -2,36 +2,47 @@ import MoviesLibrary from './Movies-library';
 import createMoviesMarkup from '../templates/movies-markup';
 import renderPagination from './render-pagination';
 
+const LS_QUEUE = 'queueForWatch';
+const LS_WATCHED = 'watchedMovies';
+
 const refs = {
-  moviesQueueContainer: document.querySelector('[data-movies-queue]'),
-  moviesQueuePagination: document.querySelector(
-    '[data-movies-queue-pagination]'
+  libraryMoviesContainer: document.querySelector('[data-user-library]'),
+  libraryMoviesPagination: document.querySelector(
+    '[data-user-library-pagination]'
   ),
-  watchedMoviesContainer: document.querySelector('[data-watched-movies]'),
-  watchedMoviesPagination: document.querySelector(
-    '[data-watched-movies-pagination]'
-  ),
+  libraryWatchedBtn: document.querySelector('[data-library="watched"]'),
+  libraryQueueBtn: document.querySelector('[data-library="queue"]'),
 };
 
-console.log(refs.moviesQueueContainer)
+refs.libraryWatchedBtn.addEventListener('click', onWatchedBtnClick);
+refs.libraryQueueBtn.addEventListener('click', onQueueBtnClick);
 
-
-const moviesQueue = new MoviesLibrary(
-  refs.moviesQueueContainer,
-  'queueForWatch',
+const userLibrary = new MoviesLibrary(
+  refs.libraryMoviesContainer,
   createMoviesMarkup
 );
 
+userLibrary.storageName = LS_WATCHED;
 
-updateMoviesQueue();
+updateUserLibrary();
 
-function updateMoviesQueue() {
-  moviesQueue.render();
+function updateUserLibrary() {
+  userLibrary.render();
   renderPagination(
-    moviesQueue.page,
-    moviesQueue.pages,
-    refs.moviesQueuePagination
+    userLibrary.page,
+    userLibrary.pages,
+    refs.libraryMoviesPagination
   );
+}
+
+function onWatchedBtnClick(e) {
+  userLibrary.storageName = LS_WATCHED;
+  updateUserLibrary();
+}
+
+function onQueueBtnClick(e) {
+  userLibrary.storageName = LS_QUEUE;
+  updateUserLibrary();
 }
 
 // function onMoviesQueuePaginationClick(e) {
