@@ -28,19 +28,26 @@ export default function paginationMarkup(currentPage, totalPages) {
       ? `<button data-page="${totalPages}" class="pagination-btn">${totalPages}</button>`
       : '';
 
-  const firstSeparator =
-    minPage > 2 ? '<span class="pagination-btn">...</span>' : '';
+  const firstSeparator = minPage > 2 ? '<span class="span-btn">...</span>' : '';
   const lastSeparator =
-    maxPage < totalPages - 1 ? '<span class="pagination-btn">...</span>' : '';
+    maxPage < totalPages - 1 ? '<span class="span-btn">...</span>' : '';
 
   const goBackBtn =
     currentPage === 1
-      ? `<button disabled class="pagination-btn disabled"><span>&#129144;</span></button>`
-      : `<button data-page-step="-1" class="pagination-btn grey-light"><span>&#129144;</span></button>`;
+      ? `<button disabled class="pagination-btn disabled"><svg class="arrow__icon" width="16" height="16" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                <path d="M25.334 16h-18.668M16 25.334l-9.334-9.334 9.334-9.334"></path>
+              </svg></button>`
+      : `<button data-page-step="-1" class="pagination-btn"><svg class="arrow__icon" width="16" height="16" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                <path d="M25.334 16h-18.668M16 25.334l-9.334-9.334 9.334-9.334"></path>
+              </svg></button>`;
   const goForwardBtn =
     currentPage === totalPages
-      ? `<button disabled class="pagination-btn"><span>&#129146;</span></button>`
-      : `<button data-page-step="1" class="pagination-btn grey-light"><span>&#129146;</span></button>`;
+      ? `<button disabled class="pagination-btn disabled"><svg class="arrow__icon" width="16" height="16" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.666 16h18.668M16 25.334l9.334-9.334-9.334-9.334"></path>
+              </svg></button>`
+      : `<button data-page-step="1" class="pagination-btn"><svg class="arrow__icon" width="16" height="16" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.666 16h18.668M16 25.334l9.334-9.334-9.334-9.334"></path>
+              </svg></button>`;
 
   return (
     goBackBtn +
