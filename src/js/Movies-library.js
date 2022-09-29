@@ -1,5 +1,5 @@
 export default class MoviesLibrary {
-  constructor(container, storageName, createMarkup) {
+  constructor(container, createMarkup) {
     this.container = container;
     this.storageName = storageName;
     this.page = 1;

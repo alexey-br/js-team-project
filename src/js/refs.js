@@ -8,15 +8,14 @@ const refs = {
   paginationContainer: document.querySelector('[data-pages]'),
   movieModal: document.querySelector('[data-movie-modal]'),
   movieModalCloseBtn: document.querySelector('[data-movie-modal-close]'),
-  // movieDetails: document.querySelector('[data-movie-details]'),
-  moviesQueueContainer: document.querySelector('[data-movies-queue]'),
-  moviesQueuePagination: document.querySelector(
-    '[data-movies-queue-pagination]'
-  ),
-  watchedMoviesContainer: document.querySelector('[data-watched-movies]'),
-  watchedMoviesPagination: document.querySelector(
-    '[data-watched-movies-pagination]'
-  ),
+  // moviesQueueContainer: document.querySelector('[data-movies-queue]'),
+  // moviesQueuePagination: document.querySelector(
+  //   '[data-movies-queue-pagination]'
+  // ),
+  // watchedMoviesContainer: document.querySelector('[data-watched-movies]'),
+  // watchedMoviesPagination: document.querySelector(
+  //   '[data-watched-movies-pagination]'
+  // ),
 };
 
 export default refs;
