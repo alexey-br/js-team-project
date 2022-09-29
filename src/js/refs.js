@@ -17,6 +17,7 @@ const refs = {
   watchedMoviesPagination: document.querySelector(
     '[data-watched-movies-pagination]'
   ),
+  errorOutput: document.querySelector('[data-message]')
 };
 
 export default refs;
