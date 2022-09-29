@@ -5,6 +5,7 @@ import createMovieDetailsMarkup from '../templates/movie-details-markup';
 import refs from './refs';
 import renderPagination from './render-pagination';
 import renderModal from './render-modal';
+import { normalizeMoviesData } from './data-normalizer';
 
 refs.searchForm.addEventListener('submit', onSearch);
 refs.paginationContainer.addEventListener('click', onPaginationClick);
@@ -42,25 +43,25 @@ async function onMovieCardClick(e) {
 }
 
 function renderMovies(moviesData) {
-  const updatedMoviesData = updateMovieGeneres(
+  const updatedMoviesData = normalizeMoviesData(
     moviesData,
     tmdbService.genresMap
   );
   refs.moviesContainer.innerHTML = createMoviesMarkup(updatedMoviesData);
 }
 
-function updateMovieGeneres(moviesData, genresMap) {
-  const updatedMoviesData = moviesData.map(
-    ({ id, genre_ids, poster_path, release_date, title, vote_average }) => {
-      const genres = genre_ids.map(genreId => ({
-        id: genreId,
-        name: genresMap[genreId],
-      }));
-      return { id, genres, poster_path, release_date, title, vote_average };
-    }
-  );
-  return updatedMoviesData;
-}
+// function normalizeMoviesData(moviesData, genresMap) {
+//   const updatedMoviesData = moviesData.map(
+//     ({ id, genre_ids, poster_path, release_date, title, vote_average }) => {
+//       const genres = genre_ids.map(genreId => ({
+//         id: genreId,
+//         name: genresMap[genreId],
+//       }));
+//       return { id, genres, poster_path, release_date, title, vote_average };
+//     }
+//   );
+//   return updatedMoviesData;
+// }
 
 function onPaginationClick(e) {
   const target = e.target.closest('button');
