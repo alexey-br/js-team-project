@@ -65,7 +65,7 @@ function renderModal({
   release_date,
 }) {
 
-  const BASE_URL = 'http://image.tmdb.org/t/p/';
+  const BASE_URL = 'https://image.tmdb.org/t/p/';
   const movieGenres = genres.map(genre => genre.name).join(', ');
   const poster = poster_path
     ? `${BASE_URL}w500${poster_path}`
