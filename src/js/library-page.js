@@ -3,9 +3,7 @@ import createMoviesMarkup from '../templates/movies-markup';
 import renderPagination from './render-pagination';
 import renderModal from './render-modal';
 import backToTop from './scroll-to-top';
-
-const LS_QUEUE = 'queueForWatch';
-const LS_WATCHED = 'watchedMovies';
+import { LS_QUEUE, LS_WATCHED } from './constants';
 
 const refs = {
   libraryMoviesContainer: document.querySelector('[data-user-library]'),
