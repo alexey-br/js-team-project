@@ -13,11 +13,15 @@ export default function renderModal({
   poster_path,
   release_date,
 }) {
-  const BASE_URL = 'https://image.tmdb.org/t/p/';
-  const movieGenres = genres.map(genre => genre.name).join(', ');
-  const poster = poster_path
-    ? `${BASE_URL}w500${poster_path}`
-    : './default-poster.jpg';
+  // const BASE_URL = 'https://image.tmdb.org/t/p/';
+  // const movieGenres = genres.map(genre => genre.name).join(', ');
+
+  let votes = '<span>No votes</span>';
+  if (vote_average > 0) {
+    votes = `
+    <span class="modal__rating-right-item--color">${vote_average}</span> /
+    <span class="modal__rating-right-item--shadow">${vote_count}</span>`;
+  }
 
   const modal = basicLightbox.create(
     `
@@ -30,7 +34,7 @@ export default function renderModal({
         <div class="modal__picture-wrap">
           <img
           class="modal__picture"
-          src="${poster}"
+          src="${poster_path}"
           alt="film-picture"
           />
           <button class="modal__button-play trailer-button" data-id="${id}">
@@ -48,12 +52,11 @@ export default function renderModal({
             </ul>
             <ul class="modal__rating-right-list">
               <li class="modal__rating-right-item">
-                <span class="modal__rating-right-item--color">${vote_average}</span> /
-                <span class="modal__rating-right-item--shadow">${vote_count}</span>
+                ${votes}
               </li>
               <li class="modal__rating-right-item">${popularity}</li>
               <li class="modal__rating-right-item modal__rating-right-item--uppercase">${original_title}</li>
-              <li class="modal__rating-right-item">${movieGenres}</li>
+              <li class="modal__rating-right-item">${genres}</li>
             </ul>
           </div>
           <div class="modal__content-wrap">

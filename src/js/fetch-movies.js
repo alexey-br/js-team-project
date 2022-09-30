@@ -5,7 +5,7 @@ import createMovieDetailsMarkup from '../templates/movie-details-markup';
 import refs from './refs';
 import renderPagination from './render-pagination';
 import renderModal from './render-modal';
-import { normalizeMoviesData } from './data-normalizer';
+import { normalizeMoviesData, normalizeMovieData } from './data-normalizer';
 
 refs.searchForm.addEventListener('submit', onSearch);
 refs.paginationContainer.addEventListener('click', onPaginationClick);
@@ -33,8 +33,9 @@ async function onMovieCardClick(e) {
   try {
     const movieId = Number(targetEl.dataset.movieId);
     const movieData = await tmdbService.fetchMovie(movieId);
+    const normalizedMovieData = normalizeMovieData(movieData);
 
-    renderModal(movieData);
+    renderModal(normalizedMovieData);
 
     // openMovieModal();
   } catch (error) {

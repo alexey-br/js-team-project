@@ -6,7 +6,7 @@ export default function createMoviesMarkup(moviesData) {
     let genresList = '';
     if (genres.length === 0) {
       genresList = 'No genre';
-    } else if (genres.length < 3) {
+    } else if (genres.length < 4) {
       genresList = genres.map(({ name }) => name).join(', ');
     } else {
       genresList = `${genres[0].name}, ${genres[1].name}, Other`;
