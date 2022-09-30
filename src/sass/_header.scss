@@ -1,24 +1,10 @@
-.container {
-  position: relative;
-  min-width: 320px;
-  margin-right: auto;
-  margin-left: auto;
-  padding-right: 20px;
-  padding-left: 20px;
-
-  @media screen and (min-width: 768px) {
-    padding-right: 32px;
-    padding-left: 32px;
-  }
-}
-
 .header {
   padding-top: 40px;
   padding-bottom: 92px;
   height: 230px;
   position: relative;
   margin: 0 auto;
-  margin-bottom: 60px;
+  // margin-bottom: 60px;
 
   @media screen and (min-width: 768px) {
     padding-bottom: 80px;
@@ -61,6 +47,27 @@
       background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
         url('/src/images/image-header/abstract-background-desktop2x.jpg');
     }
+  }
+}
+.container {
+  min-width: 320px;
+}
+.header__container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 20px;
+  padding-left: 20px;
+
+  @media screen and (min-width: 480px) {
+    max-width: 480px;
+  }
+  @media screen and (min-width: 768px) {
+    max-width: 768px;
+    padding-right: 32px;
+    padding-left: 32px;
+  }
+  @media screen and (min-width: 1280px) {
+    max-width: 1280px;
   }
 }
 
@@ -198,24 +205,25 @@
   margin-left: 24px;
 }
 
-.modal-open-btn{
+.modal-open-btn {
+  padding: 0;
   background-color: transparent;
   border: none;
 }
 
-.modal-open-btn__icon{
-  fill:#ffffff;
-   
+.modal-open-btn__icon {
+  fill: #ffffff;
+
   &:hover,
   &:focus {
     fill: #ff6b01;
   }
 }
 
-
 .warning__message {
   margin: 20px auto 0;
   width: 280px;
+  padding-right: 30px;
   color: #ff001b;
   font-weight: 400;
   font-size: 14px;

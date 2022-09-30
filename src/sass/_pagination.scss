@@ -50,12 +50,30 @@
 
     cursor: default;
   }
-
-  &.grey-light {
-    background-color: #f7f7f7;
-  }
 }
 
 .pagination-btn + .pagination-btn {
   margin-left: 5px;
+}
+
+.span-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 40px;
+  height: 40px;
+
+  background-color: #ffffff;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.3;
+
+  color: #000000;
+  cursor: default;
 }
