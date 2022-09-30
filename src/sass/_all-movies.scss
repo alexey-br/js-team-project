@@ -20,8 +20,9 @@
 
   display: flex;
   flex-wrap: wrap;
-  margin-left: -16px;
+  // margin-left: -16px;
   margin-top: -32px;
+    
 }
 
 .card__info {
@@ -64,7 +65,7 @@
     flex-basis: calc((100% - 3 * 30px) / 3);
   }
 
-  transition: 500ms linear;
+//   transition: 500ms linear;
 
 }
 
