@@ -1,23 +1,27 @@
 import * as basicLightbox from 'basiclightbox';
 import refs from './refs';
+import { normalizeMovieData } from './data-normalizer';
 
-export default function renderModal({
-  id,
-  title,
-  original_title,
-  vote_average,
-  vote_count,
-  popularity,
-  genres,
-  overview,
-  poster_path,
-  release_date,
-}) {
-  const BASE_URL = 'https://image.tmdb.org/t/p/';
-  const movieGenres = genres.map(genre => genre.name).join(', ');
-  const poster = poster_path
-    ? `${BASE_URL}w500${poster_path}`
-    : './default-poster.jpg';
+export default function renderModal(movieDataToRender) {
+  const normalizedMovieData = normalizeMovieData(movieDataToRender);
+  const {
+    id,
+    title,
+    original_title,
+    vote_average,
+    vote_count,
+    popularity,
+    genres,
+    overview,
+    poster_path,
+  } = normalizedMovieData;
+
+  let votes = '<span>No votes</span>';
+  if (vote_average > 0) {
+    votes = `
+    <span class="modal__rating-right-item--color">${vote_average}</span> /
+    <span class="modal__rating-right-item--shadow">${vote_count}</span>`;
+  }
 
   const modal = basicLightbox.create(
     `
@@ -30,7 +34,7 @@ export default function renderModal({
         <div class="modal__picture-wrap">
           <img
           class="modal__picture"
-          src="${poster}"
+          src="${poster_path}"
           alt="film-picture"
           />
           <button class="modal__button-play trailer-button" data-id="${id}">
@@ -48,12 +52,11 @@ export default function renderModal({
             </ul>
             <ul class="modal__rating-right-list">
               <li class="modal__rating-right-item">
-                <span class="modal__rating-right-item--color">${vote_average}</span> /
-                <span class="modal__rating-right-item--shadow">${vote_count}</span>
+                ${votes}
               </li>
               <li class="modal__rating-right-item">${popularity}</li>
               <li class="modal__rating-right-item modal__rating-right-item--uppercase">${original_title}</li>
-              <li class="modal__rating-right-item">${movieGenres}</li>
+              <li class="modal__rating-right-item">${genres}</li>
             </ul>
           </div>
           <div class="modal__content-wrap">
@@ -94,29 +97,15 @@ export default function renderModal({
   }
 
   function clickForCloseModal(event) {
-    // console.log(event.target.classList.value);
     if (event.target.classList.value === 'basicLightbox__placeholder') {
       modal.close();
     }
   }
 
   modal.show();
-  // textContentWatched(id);
-  // textContentQueue(id);
 
   refs.movieDetails = document.querySelector('[data-movie-details]');
-  refs.movieDetails.movieData = {
-    id,
-    title,
-    original_title,
-    vote_average,
-    vote_count,
-    popularity,
-    genres,
-    overview,
-    poster_path,
-    release_date,
-  };
+  refs.movieDetails.movieData = movieDataToRender;
 
   const addToWatchedBtnRef = document.querySelector('[data-watched]');
   const addToQueueBtnRef = document.querySelector('[data-queue]');
@@ -129,14 +118,11 @@ function addToWatched(e) {
   const { movieData } = refs.movieDetails;
   addMovieToList(movieData, 'watchedMovies');
   removeMovieFromList(movieData.id, 'queueForWatch');
-  // updateMoviesQueue();
-  // updateWatchedMovies();
 }
 
 function addToQueue(e) {
   const { movieData } = refs.movieDetails;
   addMovieToList(movieData, 'queueForWatch');
-  // updateMoviesQueue();
 }
 
 function addMovieToList(movieData, listName) {
