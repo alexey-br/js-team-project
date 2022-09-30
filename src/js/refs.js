@@ -9,8 +9,9 @@ const refs = {
   movieModal: document.querySelector('[data-movie-modal]'),
   movieModalCloseBtn: document.querySelector('[data-movie-modal-close]'),
   switcher: document.querySelector('.switcher-toggle'),
-
+  spinner: document.getElementById('page-preloader'),
   errorOutput: document.querySelector('[data-message]'),
+  goTopBtn: document.querySelector('[data-go-to-top]'),
 };
 
 export default refs;
