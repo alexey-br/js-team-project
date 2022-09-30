@@ -29,22 +29,43 @@
 }
 
 .card__film {
-  border-radius: 5px;
+  // border-radius: 5px;
 
-  margin-top: 32px;
-  margin-left: 15px;
-  width: 100%;
+  // margin-top: 32px;
+  // margin-left: 15px;
+  // width: 100%;
+  // cursor: pointer;
+
+  // @media screen and (min-width: 768px) {
+  //   flex-basis: calc(100% / 2 - 16px);
+  // }
+
+  // @media screen and (min-width: 1280px) {
+  //   flex-basis: calc(100% / 3 - 16px);
+  // }
+
+  // transition: 0.5s linear;
+
   cursor: pointer;
+  border-radius: 5px;
+  transform: scale(1);
+  transition: transform 250ms linear;
 
-  @media screen and (min-width: 768px) {
-    flex-basis: calc(100% / 2 - 16px);
+  @media screen and (max-width: 767px) {
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
   }
-
+  @media screen and (min-width: 768px) {
+    margin: 15px;
+    flex-basis: calc((100% - 2 * 30px) / 2);
+  }
   @media screen and (min-width: 1280px) {
-    flex-basis: calc(100% / 3 - 16px);
+    flex-basis: calc((100% - 3 * 30px) / 3);
   }
 
   transition: 500ms linear;
+
 }
 
 .card__film:hover,
@@ -62,7 +83,8 @@
   object-fit: cover;
 
   @media screen and (min-width: 768px) {
-    width: 336px;
+    // width: 336px;
+    width: 343px;
     height: 455px;
     margin-bottom: 8px;
   }

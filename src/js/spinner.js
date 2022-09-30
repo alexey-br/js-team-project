@@ -1,4 +1,3 @@
-
 const preloader = document.getElementById('page-preloader');
 
 document.body.onload = function () {

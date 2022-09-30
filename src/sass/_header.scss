@@ -1,23 +1,23 @@
-.container {
-  position: relative;
-  min-width: 320px;
-  margin-right: auto;
-  margin-left: auto;
-  padding-right: 20px;
-  padding-left: 20px;
+// .container {
+//   position: relative;
+//   min-width: 320px;
+//   margin-right: auto;
+//   margin-left: auto;
+//   padding-right: 20px;
+//   padding-left: 20px;
 
-  @media screen and (min-width: 480px) {
-    max-width: 480px;
-  }
-  @media screen and (min-width: 768px) {
-    max-width: 768px;
-    padding-right: 32px;
-    padding-left: 32px;
-  }
-  @media screen and (min-width: 1280px) {
-    max-width: 1280px;
-  }
-}
+//   @media screen and (min-width: 480px) {
+//     max-width: 480px;
+//   }
+//   @media screen and (min-width: 768px) {
+//     max-width: 768px;
+//     padding-right: 32px;
+//     padding-left: 32px;
+//   }
+//   @media screen and (min-width: 1280px) {
+//     max-width: 1280px;
+//   }
+// }
 
 .header {
   padding-top: 40px;
@@ -68,6 +68,27 @@
       background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
         url('/src/images/image-header/abstract-background-desktop2x.jpg');
     }
+  }
+}
+
+.header__container {
+  position: relative;
+  min-width: 320px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 20px;
+  padding-left: 20px;
+
+  @media screen and (min-width: 480px) {
+    max-width: 480px;
+  }
+  @media screen and (min-width: 768px) {
+    max-width: 768px;
+    padding-right: 32px;
+    padding-left: 32px;
+  }
+  @media screen and (min-width: 1280px) {
+    max-width: 1280px;
   }
 }
 
