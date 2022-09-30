@@ -1,19 +1,29 @@
-window.onscroll = function() {scrollFunction()};
+import '../sass/scrollTop.scss';
 
-function scrollFunction() {
-    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-        document.getElementById("btn").style.display = "block";
-    } else {
-        document.getElementById("btn").style.display = "none";
+const goTopBtn=document.querySelector('.back-to-top');
+
+function trackScroll() {
+    const scrolled=window.pageYOffset;
+    const coords=document.documentElement.clientHeight;
+
+    if (scrolled > coords) {
+        goTopBtn.classList.add('back-to-top-show');
+    }
+
+    if (scrolled < coords) {
+        goTopBtn.classList.remove('back-to-top-show');
     }
 }
 
-var t;
-function up() {
-	var top = Math.max(document.body.scrollTop,document.documentElement.scrollTop);
-	if(top > 0) {
-		window.scrollBy(0,-100);
-		t = setTimeout('up()',20);
-	} else clearTimeout(t);
-	return false;
+window.addEventListener('scroll', trackScroll);
+
+function backToTop() {
+    if (window.pageYOffset > 0) {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
 }
+}
+
+goTopBtn.addEventListener('click', backToTop);
