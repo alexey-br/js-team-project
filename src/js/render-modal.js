@@ -1,20 +1,20 @@
 import * as basicLightbox from 'basiclightbox';
 import refs from './refs';
+import { normalizeMovieData } from './data-normalizer';
 
-export default function renderModal({
-  id,
-  title,
-  original_title,
-  vote_average,
-  vote_count,
-  popularity,
-  genres,
-  overview,
-  poster_path,
-  release_date,
-}) {
-  // const BASE_URL = 'https://image.tmdb.org/t/p/';
-  // const movieGenres = genres.map(genre => genre.name).join(', ');
+export default function renderModal(movieDataToRender) {
+  const normalizedMovieData = normalizeMovieData(movieDataToRender);
+  const {
+    id,
+    title,
+    original_title,
+    vote_average,
+    vote_count,
+    popularity,
+    genres,
+    overview,
+    poster_path,
+  } = normalizedMovieData;
 
   let votes = '<span>No votes</span>';
   if (vote_average > 0) {
@@ -97,29 +97,15 @@ export default function renderModal({
   }
 
   function clickForCloseModal(event) {
-    // console.log(event.target.classList.value);
     if (event.target.classList.value === 'basicLightbox__placeholder') {
       modal.close();
     }
   }
 
   modal.show();
-  // textContentWatched(id);
-  // textContentQueue(id);
 
   refs.movieDetails = document.querySelector('[data-movie-details]');
-  refs.movieDetails.movieData = {
-    id,
-    title,
-    original_title,
-    vote_average,
-    vote_count,
-    popularity,
-    genres,
-    overview,
-    poster_path,
-    release_date,
-  };
+  refs.movieDetails.movieData = movieDataToRender;
 
   const addToWatchedBtnRef = document.querySelector('[data-watched]');
   const addToQueueBtnRef = document.querySelector('[data-queue]');
@@ -132,14 +118,11 @@ function addToWatched(e) {
   const { movieData } = refs.movieDetails;
   addMovieToList(movieData, 'watchedMovies');
   removeMovieFromList(movieData.id, 'queueForWatch');
-  // updateMoviesQueue();
-  // updateWatchedMovies();
 }
 
 function addToQueue(e) {
   const { movieData } = refs.movieDetails;
   addMovieToList(movieData, 'queueForWatch');
-  // updateMoviesQueue();
 }
 
 function addMovieToList(movieData, listName) {
