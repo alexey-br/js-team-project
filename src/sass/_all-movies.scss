@@ -1,3 +1,11 @@
+.all-movies__container {
+  padding-top: 20px;
+  @media screen and (min-width: 768px) {
+    padding-top: 60px;
+    // padding-top: 50px;
+  }
+}
+
 .movies__container {
   margin-right: auto;
   margin-left: auto;
@@ -21,8 +29,9 @@
   display: flex;
   flex-wrap: wrap;
   // margin-left: -16px;
-  margin-top: -32px;
-    
+@media screen and (min-width: 768px) {
+    margin-top: -15px;
+}
 }
 
 .card__info {
@@ -65,8 +74,7 @@
     flex-basis: calc((100% - 3 * 30px) / 3);
   }
 
-//   transition: 500ms linear;
-
+  //   transition: 500ms linear;
 }
 
 .card__film:hover,
