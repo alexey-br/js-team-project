@@ -15,36 +15,35 @@
   visibility: visible;
 
   .loader {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 75px;
-  height: 75px;
-  border: 10px solid white;
-  border-radius: 50%;
-  border-top-color: blue;
-  border-bottom-color: yellow;
-  border-right-color: transparent;
-  border-left-color: transparent;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 75px;
+    height: 75px;
+    border: 10px solid white;
+    border-radius: 50%;
+    border-top-color: blue;
+    border-bottom-color: yellow;
+    border-right-color: transparent;
+    border-left-color: transparent;
 
-  animation: 1s spin infinite linear;
-}
+    animation: 1s spin infinite linear;
+  }
 
-&.done {
-opacity: 0;
-visibility: hidden;
-}
-
+  &.done {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
 @keyframes spin {
-    from {
-        transform: translate(-50%, -50%) rotate(0deg);
-    }
-    to {
-        transform: translate(-50%, -50%) rotate(360deg);
-    }
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
 
 @media screen and (min-width: 768px) {
@@ -54,9 +53,9 @@ visibility: hidden;
     height: 85px;
     border: 12px solid white;
     border-top-color: blue;
-  border-bottom-color: yellow;
-  border-right-color: transparent;
-  border-left-color: transparent;
+    border-bottom-color: yellow;
+    border-right-color: transparent;
+    border-left-color: transparent;
   }
 }
 
@@ -67,8 +66,8 @@ visibility: hidden;
     height: 95px;
     border: 14px solid white;
     border-top-color: blue;
-  border-bottom-color: yellow;
-  border-right-color: transparent;
-  border-left-color: transparent;
+    border-bottom-color: yellow;
+    border-right-color: transparent;
+    border-left-color: transparent;
   }
 }

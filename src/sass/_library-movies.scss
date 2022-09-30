@@ -1,24 +1,50 @@
-.continer_card {
-  max-width: max-content;
+.movies__container {
+  margin-right: auto;
+  margin-left: auto;
   padding: 0 20px;
-  margin: 0 auto;
-  margin-bottom: 40px;
+  width: 320px;
 
   @media screen and (min-width: 768px) {
-    max-width: 704px;
-    padding: 0 32px;
-    margin-bottom: 60px;
+    width: 768px;
   }
+
   @media screen and (min-width: 1280px) {
-    max-width: 1215px;
+    width: 1280px;
+    padding: 0 32px;
   }
 }
 
-.card__colection {
-  @media screen and (min-width: 768px) {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: -15px;
-  }
+.movies-list {
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -16px;
+  margin-top: -32px;
 }
+
+// .continer_card {
+//   max-width: max-content;
+//   padding: 0 20px;
+//   margin: 0 auto;
+//   margin-bottom: 40px;
+
+//   @media screen and (min-width: 768px) {
+//     max-width: 704px;
+//     padding: 0 32px;
+//     margin-bottom: 60px;
+//   }
+//   @media screen and (min-width: 1280px) {
+//     max-width: 1215px;
+//   }
+// }
+
+// .card__colection {
+//   @media screen and (min-width: 768px) {
+//     display: flex;
+//     flex-wrap: wrap;
+//     // justify-content: center;
+//     margin: -15px;
+//   }
+// }
