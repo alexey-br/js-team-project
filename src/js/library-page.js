@@ -1,6 +1,7 @@
 import MoviesLibrary from './Movies-library';
 import createMoviesMarkup from '../templates/movies-markup';
 import renderPagination from './render-pagination';
+import renderModal from './render-modal';
 
 const LS_QUEUE = 'queueForWatch';
 const LS_WATCHED = 'watchedMovies';
@@ -16,6 +17,11 @@ const refs = {
 
 refs.libraryWatchedBtn.addEventListener('click', onWatchedBtnClick);
 refs.libraryQueueBtn.addEventListener('click', onQueueBtnClick);
+refs.libraryMoviesContainer.addEventListener('click', onMovieCardClick);
+refs.libraryMoviesPagination.addEventListener(
+  'click',
+  onMovieLibraryPaginationClick
+);
 
 const userLibrary = new MoviesLibrary(
   refs.libraryMoviesContainer,
@@ -24,67 +30,83 @@ const userLibrary = new MoviesLibrary(
 
 userLibrary.storageName = LS_WATCHED;
 
-updateUserLibrary();
+updateMoviesLibrary(userLibrary);
 
-function updateUserLibrary() {
-  userLibrary.render();
-  renderPagination(
-    userLibrary.page,
-    userLibrary.pages,
-    refs.libraryMoviesPagination
+function onMovieCardClick(e) {
+  const targetEl = e.target.closest('li');
+  if (!targetEl) return;
+
+  const movieId = Number(targetEl.dataset.movieId);
+
+  const movieData = getMovieDatafromLS(movieId, userLibrary);
+
+  renderModal(movieData);
+}
+
+function getMovieDatafromLS(movieId, libraryName) {
+  const moviesList = JSON.parse(localStorage.getItem(libraryName.storageName));
+  if (!moviesList) return;
+
+  const movieData = moviesList.find(({ id }) => id === movieId);
+
+  return movieData;
+}
+
+function updateMoviesLibrary(moviesLibrary) {
+  clearLibraryContainer();
+
+  const moviesList = JSON.parse(
+    localStorage.getItem(moviesLibrary.storageName)
   );
+  if (!moviesList || moviesList.length < 1) return;
+
+  moviesLibrary.render();
+
+  if (moviesList.length > 20) {
+    renderPagination(
+      moviesLibrary.page,
+      moviesLibrary.pages,
+      refs.libraryMoviesPagination
+    );
+  }
 }
 
 function onWatchedBtnClick(e) {
+  setWatchedBtnActive();
   userLibrary.storageName = LS_WATCHED;
-  updateUserLibrary();
+  updateMoviesLibrary(userLibrary);
 }
 
 function onQueueBtnClick(e) {
+  setQueueBtnActive();
   userLibrary.storageName = LS_QUEUE;
-  updateUserLibrary();
+  updateMoviesLibrary(userLibrary);
 }
 
-// function onMoviesQueuePaginationClick(e) {
-//   const target = e.target.closest('button');
-//   if (!target) return;
+function onMovieLibraryPaginationClick(e) {
+  const target = e.target.closest('button');
+  if (!target) return;
 
-//   if (target.dataset.page) {
-//     moviesQueue.page = Number(target.dataset.page);
-//   }
-//   if (target.dataset.pageStep) {
-//     moviesQueue.page += Number(target.dataset.pageStep);
-//   }
-//   updateMoviesQueue();
-// }
+  if (target.dataset.page) {
+    userLibrary.page = Number(target.dataset.page);
+  }
+  if (target.dataset.pageStep) {
+    userLibrary.page += Number(target.dataset.pageStep);
+  }
+  updateMoviesLibrary(userLibrary);
+}
 
-// // ----------------------------------------------------
-// const watchedMovies = new MoviesLibrary(
-//   refs.watchedMoviesContainer,
-//   'watchedMovies',
-//   createMoviesMarkup
-// );
+function setWatchedBtnActive() {
+  refs.libraryWatchedBtn.classList.add('active__btn');
+  refs.libraryQueueBtn.classList.remove('active__btn');
+}
 
-// updateWatchedMovies();
+function setQueueBtnActive() {
+  refs.libraryQueueBtn.classList.add('active__btn');
+  refs.libraryWatchedBtn.classList.remove('active__btn');
+}
 
-// function updateWatchedMovies() {
-//   watchedMovies.render();
-//   renderPagination(
-//     watchedMovies.page,
-//     watchedMovies.pages,
-//     refs.watchedMoviesPagination
-//   );
-// }
-
-// function onWatchedMoviesPaginationClick(e) {
-//   const target = e.target.closest('button');
-//   if (!target) return;
-
-//   if (target.dataset.page) {
-//     watchedMovies.page = Number(target.dataset.page);
-//   }
-//   if (target.dataset.pageStep) {
-//     watchedMovies.page += Number(target.dataset.pageStep);
-//   }
-//   updateWatchedMovies();
-// }
+function clearLibraryContainer() {
+  refs.libraryMoviesContainer.innerHTML = '';
+  refs.libraryMoviesPagination.innerHTML = '';
+}
