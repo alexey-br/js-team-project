@@ -2,6 +2,7 @@ import MoviesLibrary from './Movies-library';
 import createMoviesMarkup from '../templates/movies-markup';
 import renderPagination from './render-pagination';
 import renderModal from './render-modal';
+import backToTop from './scroll-to-top';
 
 const LS_QUEUE = 'queueForWatch';
 const LS_WATCHED = 'watchedMovies';
@@ -84,6 +85,7 @@ function onQueueBtnClick(e) {
 }
 
 function onMovieLibraryPaginationClick(e) {
+  backToTop();
   const target = e.target.closest('button');
   if (!target) return;
 
