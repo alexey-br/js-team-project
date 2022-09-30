@@ -60,7 +60,7 @@ export const teamCards = [
         name: 'Антон',
         surname: 'Клименко',
         role: 'Developer',
-        tasks: 'Реалізована модалка з динамічно підставленою інформацією про фільм',
+        tasks: 'Реалізований scroll',
     },
     {
         photo: 'https://ca.slack-edge.com/T03L32N8Q9X-U03KRKY1T5K-b31fc2eeccbd-512',
