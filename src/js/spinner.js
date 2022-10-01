@@ -1,18 +1,11 @@
-const preloader = document.getElementById('page-preloader');
+import refs from './refs';
 
-document.body.onload = function () {
-  setTimeout(function () {
-    if (!preloader.classList.contains('done')) {
-      preloader.classList.add('done');
-    }
+export default function showSpinner() {
+  refs.spinner.classList.remove('done');
+
+  setTimeout(() => {
+    refs.spinner.classList.add('done');
   }, 500);
-};
+}
 
-// export const spinnerMethod = {
-//   removeSpinner: function () {
-//         setTimeout(preloader.classList.add('done'), 500);
-//   },
-//   addSpinner: function () {
-//         preloader.classList.remove('done');
-//   },
-// };
+document.body.onload = showSpinner;

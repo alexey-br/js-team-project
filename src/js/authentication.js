@@ -1,4 +1,6 @@
+import { async } from '@firebase/util';
 import Firebase from './firebase';
+import Notiflix from 'notiflix';
 
 const firebase = new Firebase();
 
@@ -8,18 +10,84 @@ const authenticationBackdrop = document.querySelector(
 
 const modalExit = document.querySelector('#modal-btn-exit');
 const modalOpen = document.querySelector('.modal-open-btn');
+
 const formContainer = document.querySelector('#form-container');
-// const regForm = document.querySelector('#btn-reg-open-form');
+const navAuthContainer = document.querySelector('#navAuthContainer');
+const btnProfile = document.querySelector('#btn-profile');
+const patronContainer = document.querySelector('#patron');
 
 modalOpen.addEventListener('click', modalAuthOpen);
 modalExit.addEventListener('click', modalClose);
-// regForm.addEventListener('click', openRegForm);
 
-function logInSite(evt) {
-  evt.preventDefault();
-  console.log('нарешті');
+start();
+async function start() {
+  await authenticationState();
 }
 
+//перевірка наявності користувача
+async function authenticationState() {
+  const savedSettings = await localStorage.getItem('user');
+  const user = await JSON.parse(savedSettings);
+  await renderInterface(user);
+}
+
+function renderInterface(user) {
+  if (user) {
+    const email = user.email;
+    navAuthContainer.innerHTML = `<button type="button" class="interface-btn interface-btn-user" id="btn-profile">
+      ${email}
+    </button>
+    <button type="button" class="interface-btn interface-btn-out" id="btn-out">
+      go out
+    </button>`;
+    modalOpen.classList.add('is_hidden');
+    const btnOut = document.querySelector('#btn-out');
+    btnOut.addEventListener('click', out);
+    console.log('в перевірці' + user);
+
+    patronContainer.classList.remove('is_hidden');
+    modalClose();
+  } else {
+    patronContainer.classList.add('is_hidden');
+    modalOpen.classList.remove('is_hidden');
+    navAuthContainer.innerHTML = '';
+  }
+}
+
+// Авторизація
+async function logInSite(evt) {
+  evt.preventDefault();
+  try {
+    const email = evt.currentTarget.elements.email.value;
+    const password = evt.currentTarget.elements.password.value;
+    console.log('Авторизація');
+    const userAuth = await firebase.signIn(email, password);
+    const user = await authenticationState();
+  } catch {
+    console.log('кетч авторизації');
+  }
+}
+
+// реєстрація
+async function registrationUser(evt) {
+  evt.preventDefault();
+
+  const email = evt.currentTarget.elements.email.value;
+  const password = evt.currentTarget.elements.password.value;
+  const confirmPassword = evt.currentTarget.elements.confirmPassword.value;
+  if (password === confirmPassword) {
+    try {
+      await firebase.createUser(email, password);
+      await authenticationState();
+    } catch (error) {
+      console.log('ппц');
+    }
+  } else {
+    Notiflix.Notify.failure('you entered different passwords');
+  }
+}
+
+// модалка авторизації
 function modalAuthOpen() {
   console.log('відкриваю');
   renderAuthentication();
@@ -31,6 +99,7 @@ function modalAuthOpen() {
   authenticationForm.addEventListener('submit', logInSite);
 }
 
+// модалка реєстрації
 function openRegForm() {
   renderRegistrationForm();
 
@@ -38,23 +107,21 @@ function openRegForm() {
   registrationForm.addEventListener('submit', registrationUser);
 }
 
+// закриває модалку автентифікації
 function modalClose() {
   authenticationBackdrop.classList.add('is_hidden');
 }
 
-function registrationUser(evt) {
-  evt.preventDefault();
-  console.log('зареєстровано');
-}
-
+// рендер модалки авторизації
 function renderAuthentication() {
   formContainer.innerHTML = ` <form class="authentication-form" id="authentication-form">
   <div class="input-form">
         <input
           class="auth_input"
           type="email"
-          name="login"
+          name="email"
           placeholder="Email..."
+          autocomplete="off"
         />
         <input
           class="auth_input"
@@ -62,6 +129,7 @@ function renderAuthentication() {
           name="password"
           placeholder="Password..."
           minlength="6"
+          autocomplete="off"
         />
       </div>
       <button
@@ -78,9 +146,11 @@ function renderAuthentication() {
       <button type="button" class="btn-reg-open-form" id="btn-reg-open-form">
         Registration
       </button>
+      
       </form>`;
 }
 
+// рендер модалки реєстрації
 function renderRegistrationForm() {
   formContainer.innerHTML = '';
   formContainer.innerHTML = `  <form class="authentication-form" id="registration-form">
@@ -88,8 +158,9 @@ function renderRegistrationForm() {
         <input
           class="auth_input"
           type="email"
-          name="login"
+          name="email"
           placeholder="Email..."
+          autocomplete="off"
         />
         <input
           class="auth_input"
@@ -97,13 +168,15 @@ function renderRegistrationForm() {
           name="password"
           placeholder="Password..."
           minlength="6"
+          autocomplete="off"
         />
         <input
           class="auth_input"
           type="password"
-          name="password"
-          placeholder="Password..."
+          name="confirmPassword"
+          placeholder="Confirm password..."
           minlength="6"
+          autocomplete="off"
         />
       </div>
       <button
@@ -119,8 +192,9 @@ function renderRegistrationForm() {
      `;
 }
 
-//перевірити наявність користувача
-
-//зареєструвати
-
-//логін
+//вийти з акаунта
+async function out() {
+  await firebase.out();
+  await authenticationState();
+  Notiflix.Notify.success('You are logged out');
+}

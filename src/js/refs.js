@@ -9,20 +9,9 @@ const refs = {
   movieModal: document.querySelector('[data-movie-modal]'),
   movieModalCloseBtn: document.querySelector('[data-movie-modal-close]'),
   switcher: document.querySelector('.switcher-toggle'),
-
-  // moviesQueueContainer: document.querySelector('[data-movies-queue]'),
-  // moviesQueuePagination: document.querySelector(
-  //   '[data-movies-queue-pagination]'
-  // ),
-  // watchedMoviesContainer: document.querySelector('[data-watched-movies]'),
-  // watchedMoviesPagination: document.querySelector(
-  //   '[data-watched-movies-pagination]'
-  // ),
-  // movieDetails: document.querySelector('[data-movie-details]'),
-
-
+  spinner: document.getElementById('page-preloader'),
   errorOutput: document.querySelector('[data-message]'),
-
+  goTopBtn: document.querySelector('[data-go-to-top]'),
 };
 
 export default refs;
