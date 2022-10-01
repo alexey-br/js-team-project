@@ -15,7 +15,7 @@ export function decodeMoviesGenres(moviesData, genresMap) {
 
 export function normalizeMovieData(movieData, genresNum) {
   let normalizedMovieData = { ...movieData };
-  const { poster_path, release_date, genres } = normalizedMovieData;
+  const { poster_path, release_date, genres, overview } = normalizedMovieData;
 
   normalizedMovieData['poster_path'] = poster_path
     ? `${BASE_URL}w500${poster_path}`
@@ -24,6 +24,10 @@ export function normalizeMovieData(movieData, genresNum) {
   normalizedMovieData['release_date'] = release_date
     ? String(parseInt(release_date))
     : 'No date';
+
+  if (overview === '') {
+    normalizedMovieData['overview'] = 'Unfortunately no info yet';
+  }
 
   if (genres.length === 0) {
     normalizedMovieData.genres = 'No genre';
