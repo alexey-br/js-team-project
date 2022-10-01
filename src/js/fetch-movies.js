@@ -15,7 +15,7 @@ refs.moviesContainer.addEventListener('click', onMovieCardClick);
 const tmdbService = new TMDB_Service();
 tmdbService.getGenres();
 
-getMovies();
+setTimeout(getMovies, 200);
 
 async function getMovies() {
   try {
