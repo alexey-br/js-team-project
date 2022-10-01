@@ -2,7 +2,7 @@ import { normalizeMovieData } from '../js/data-normalizer';
 
 export default function createMoviesMarkup(moviesData) {
   return moviesData.reduce((acc, movie) => {
-    const normalizedMovieData = normalizeMovieData(movie);
+    const normalizedMovieData = normalizeMovieData(movie, 3);
     const { id, genres, poster_path, release_date, title, vote_average } =
       normalizedMovieData;
 
