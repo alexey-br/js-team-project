@@ -10,13 +10,14 @@ const authenticationBackdrop = document.querySelector(
 
 const modalExit = document.querySelector('#modal-btn-exit');
 const modalOpen = document.querySelector('.modal-open-btn');
-
+// const modalOpenBtnLibrary = document.querySelector('#modalOpenBtnLibrary');
 const formContainer = document.querySelector('#form-container');
 const navAuthContainer = document.querySelector('#navAuthContainer');
 const btnProfile = document.querySelector('#btn-profile');
 const patronContainer = document.querySelector('#patron');
 
 modalOpen.addEventListener('click', modalAuthOpen);
+// modalOpenBtnLibrary.addEventListener('click', modalAuthOpen);
 modalExit.addEventListener('click', modalClose);
 
 start();
@@ -43,7 +44,6 @@ function renderInterface(user) {
     modalOpen.classList.add('is_hidden');
     const btnOut = document.querySelector('#btn-out');
     btnOut.addEventListener('click', out);
-    console.log('в перевірці' + user);
 
     patronContainer.classList.remove('is_hidden');
     modalClose();
@@ -60,7 +60,7 @@ async function logInSite(evt) {
   try {
     const email = evt.currentTarget.elements.email.value;
     const password = evt.currentTarget.elements.password.value;
-    console.log('Авторизація');
+
     const userAuth = await firebase.signIn(email, password);
     const user = await authenticationState();
   } catch {
@@ -79,9 +79,7 @@ async function registrationUser(evt) {
     try {
       await firebase.createUser(email, password);
       await authenticationState();
-    } catch (error) {
-      console.log('ппц');
-    }
+    } catch (error) {}
   } else {
     Notiflix.Notify.failure('you entered different passwords');
   }
@@ -89,8 +87,10 @@ async function registrationUser(evt) {
 
 // модалка авторизації
 function modalAuthOpen() {
-  console.log('відкриваю');
   renderAuthentication();
+
+  window.addEventListener('keydown', escapeKeyCloseModal);
+  // window.addEventListener('click', modalClose);
 
   const regForm = document.querySelector('#btn-reg-open-form');
   regForm.addEventListener('click', openRegForm);
@@ -110,6 +110,8 @@ function openRegForm() {
 // закриває модалку автентифікації
 function modalClose() {
   authenticationBackdrop.classList.add('is_hidden');
+  window.removeEventListener('keydown', escapeKeyCloseModal);
+  // window.removeEventListener('click', modalClose);
 }
 
 // рендер модалки авторизації
@@ -197,4 +199,12 @@ async function out() {
   await firebase.out();
   await authenticationState();
   Notiflix.Notify.success('You are logged out');
+}
+
+function escapeKeyCloseModal(event) {
+  if (event.code === 'Escape') {
+    if (!authenticationBackdrop.classList.contains('is_hidden')) {
+      modalClose();
+    }
+  }
 }

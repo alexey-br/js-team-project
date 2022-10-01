@@ -5,6 +5,7 @@ import renderModal from './render-modal';
 import backToTop from './scroll-to-top';
 import { LS_QUEUE, LS_WATCHED } from './constants';
 import clickTeamModal from './team';
+import { modalAuthOpen } from './authentication';
 
 import refs from './refs-library';
 
@@ -123,6 +124,10 @@ function hideEmptyLibraryMessage() {
   refs.emptyLibraryMessage.classList.add('visually-hidden');
 }
 
+
+const modalOpenBtnLibrary = document.querySelector('#modalOpenBtnLibrary');
+modalOpenBtnLibrary.addEventListener('click', modalAuthOpen);
+
 function toggleTheme() {
   document.body.classList.toggle('theme-dark');
   document.body.classList.toggle('theme-light');
@@ -147,3 +152,4 @@ function infoFromLS() {
     toggleTheme();
   }
 }
+
