@@ -1,3 +1,10 @@
+import {
+  BTN_WATCHED_ADD,
+  BTN_WATCHED_REMOVE,
+  BTN_QUEUE_ADD,
+  BTN_QUEUE_REMOVE,
+} from '../js/constants';
+
 export default function createModalMarkup(movieData, isInWatched, isInQueue) {
   const {
     id,
@@ -11,8 +18,8 @@ export default function createModalMarkup(movieData, isInWatched, isInQueue) {
     poster_path,
   } = movieData;
 
-  const watchBtnLabel = isInWatched ? 'remove from watched' : 'add to watched';
-  const queueBtnLabel = isInQueue ? 'remove from queue' : 'add to queue';
+  const watchBtnLabel = isInWatched ? BTN_WATCHED_REMOVE : BTN_WATCHED_ADD;
+  const queueBtnLabel = isInQueue ? BTN_QUEUE_REMOVE : BTN_QUEUE_ADD;
 
   let votes = '<span>No votes</span>';
   if (vote_average > 0) {
