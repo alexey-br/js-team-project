@@ -58,7 +58,7 @@ function renderMovies(moviesData) {
 }
 
 function removeRaring(moviesData) {
-  noRatingData = moviesData.reduce(
+  const noRatingData = moviesData.reduce(
     (acc, movieData) => (acc = [...acc, { ...movieData, vote_average: 0 }]),
     []
   );
