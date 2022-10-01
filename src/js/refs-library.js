@@ -8,6 +8,7 @@ const refs = {
   emptyLibraryMessage: document.querySelector('[data-empty-message]'),
   openModalBtn: document.querySelector('[data-modal-team-open]'),
   closeModalBtn: document.querySelector('[data-modal-team-close]'),
+  switcher: document.querySelector('.switcher-toggle'),
 };
 
 export default refs;
