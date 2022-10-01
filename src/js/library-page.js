@@ -5,6 +5,7 @@ import renderModal from './render-modal';
 import backToTop from './scroll-to-top';
 import { LS_QUEUE, LS_WATCHED } from './constants';
 import clickTeamModal from './team';
+import { modalAuthOpen } from './authentication';
 
 const refs = {
   libraryMoviesContainer: document.querySelector('[data-user-library]'),
@@ -128,3 +129,6 @@ function showEmptyLibraryMessage() {
 function hideEmptyLibraryMessage() {
   refs.emptyLibraryMessage.classList.add('visually-hidden');
 }
+
+const modalOpenBtnLibrary = document.querySelector('#modalOpenBtnLibrary');
+modalOpenBtnLibrary.addEventListener('click', modalAuthOpen);

@@ -56,7 +56,6 @@ export default class Firebase {
         );
       })
       .catch(error => {
-        console.log('спрацював кетч');
         this.errorCode = error.code;
         Notiflix.Notify.failure(this.errorCode);
       });
@@ -67,10 +66,7 @@ export default class Firebase {
     const user = this.auth.currentUser;
 
     if (user) {
-      console.log('друга перевірка, знайдено:' + user);
       localStorage.setItem('user', JSON.stringify(user));
-    } else {
-      console.log('друга перевірка, не знайдено:' + user);
     }
   }
 
