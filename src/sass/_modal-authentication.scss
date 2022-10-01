@@ -191,3 +191,32 @@
     top: 80%;
   }
 }
+
+.mind {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.55;
+  letter-spacing: 0.03em;
+  display: block;
+  position: relative;
+  justify-content: center;
+  text-align: center;
+  color: #ffffff;
+  top: -150px;
+  left: 10px;
+  width: 220px;
+  background-color: #ff6b01b7;
+  padding: 10px;
+  border-radius: 10px;
+  transition-property: transform;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transform: scale(0);
+  border: none;
+  box-shadow: -10px 10px 30px white inset;
+}
+
+.patron-container:hover .mind,
+.patron-container:focus .mind {
+  transform: scale(1) translate(50%, -50%);
+}
