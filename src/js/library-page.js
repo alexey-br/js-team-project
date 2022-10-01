@@ -16,6 +16,7 @@ const refs = {
   emptyLibraryMessage: document.querySelector('[data-empty-message]'),
   openModalBtn: document.querySelector('[data-modal-team-open]'),
   closeModalBtn: document.querySelector('[data-modal-team-close]'),
+  switcher: document.querySelector('.switcher-toggle'),
 };
 
 refs.libraryWatchedBtn.addEventListener('click', onWatchedBtnClick);
@@ -36,6 +37,10 @@ const userLibrary = new MoviesLibrary(
 userLibrary.storageName = LS_WATCHED;
 
 updateMoviesLibrary(userLibrary);
+
+document.body.classList.add('theme-light');
+  
+refs.switcher.addEventListener('click', toggleTheme);
 
 function onMovieCardClick(e) {
   const targetEl = e.target.closest('li');
@@ -127,4 +132,30 @@ function showEmptyLibraryMessage() {
 
 function hideEmptyLibraryMessage() {
   refs.emptyLibraryMessage.classList.add('visually-hidden');
+}
+
+
+function toggleTheme() {
+  document.body.classList.toggle("theme-dark");
+  document.body.classList.toggle("theme-light");
+  
+  setToLocalStorageTheme()
+}
+
+function setToLocalStorageTheme(){
+  if (document.body.classList.contains('theme-light')) {
+      document.getElementById('slider').checked = false;
+      localStorage.setItem('active-theme', '.theme-light');
+    } else if (document.body.classList.contains('theme-dark')) {
+     document.getElementById('slider').checked = true;
+      localStorage.setItem('active-theme', '.theme-dark');
+    }
+}
+
+infoFromLS();
+
+function infoFromLS() {
+if (localStorage.getItem('active-theme') === '.theme-dark') {
+  toggleTheme();
+}
 }
