@@ -29,9 +29,10 @@
   display: flex;
   flex-wrap: wrap;
   // margin-left: -16px;
-@media screen and (min-width: 768px) {
+  @media screen and (min-width: 768px) {
     margin-top: -15px;
-}
+    margin-bottom: -15px;
+  }
 }
 
 .card__info {
@@ -81,7 +82,7 @@
 .card__film:focus {
   transform: scale(1.04);
   transition: all 500ms;
-  box-shadow: 2px 0px 21px 6px rgba(238, 211, 152, 0.75);
+  box-shadow: 2px 0px 21px 6px rgba(245, 188, 64, 0.75);
 }
 
 .card__img {
