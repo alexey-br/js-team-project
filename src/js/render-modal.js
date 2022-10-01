@@ -1,8 +1,12 @@
 import * as basicLightbox from 'basiclightbox';
-import refs from './refs';
 import createModalMarkup from '../templates/modal-markup';
 import { normalizeMovieData } from './data-normalizer';
 import { LS_QUEUE, LS_WATCHED } from './constants';
+import {
+  checkMovieIsInList,
+  addMovieToList,
+  removeMovieFromList,
+} from './LS-service';
 
 export default function renderModal(movieDataToRender) {
   const normalizedMovieData = normalizeMovieData(movieDataToRender);
@@ -11,7 +15,13 @@ export default function renderModal(movieDataToRender) {
   const movieInWatched = checkMovieIsInList(movieId, LS_WATCHED);
   const movieInQueue = checkMovieIsInList(movieId, LS_QUEUE);
 
-  console.log(movieInWatched, movieInQueue);
+  const watchedBtnAction = movieInWatched
+    ? () => removeMovieFromList(movieId, LS_WATCHED)
+    : () => addMovieToList(movieDataToRender, LS_WATCHED);
+
+  const queueBtnAction = movieInQueue
+    ? () => removeMovieFromList(movieId, LS_QUEUE)
+    : () => addMovieToList(movieDataToRender, LS_QUEUE);
 
   const modal = basicLightbox.create(
     createModalMarkup(normalizedMovieData, movieInWatched, movieInQueue),
@@ -46,54 +56,38 @@ export default function renderModal(movieDataToRender) {
 
   modal.show();
 
-  refs.movieDetails = document.querySelector('[data-movie-details]');
-  refs.movieDetails.movieData = movieDataToRender;
-
   const addToWatchedBtnRef = document.querySelector('[data-watched]');
   const addToQueueBtnRef = document.querySelector('[data-queue]');
 
-  addToWatchedBtnRef.addEventListener('click', addToWatched);
-  addToQueueBtnRef.addEventListener('click', addToQueue);
+  addToWatchedBtnRef.addEventListener('click', watchedBtnAction);
+  addToQueueBtnRef.addEventListener('click', queueBtnAction);
 }
 
-function addToWatched(e) {
-  const { movieData } = refs.movieDetails;
-  addMovieToList(movieData, 'watchedMovies');
-  removeMovieFromList(movieData.id, 'queueForWatch');
-}
+// function addMovieToList(movieData, listName) {
+//   const prevList = JSON.parse(localStorage.getItem(listName));
+//   let newList = [];
 
-function addToQueue(e) {
-  const { movieData } = refs.movieDetails;
-  addMovieToList(movieData, 'queueForWatch');
-}
+//   if (prevList) {
+//     newList = [...prevList, movieData];
+//   } else {
+//     newList = [movieData];
+//   }
 
-function addMovieToList(movieData, listName) {
-  const prevList = JSON.parse(localStorage.getItem(listName));
-  let newList = [];
+//   localStorage.setItem(listName, JSON.stringify(newList));
+// }
 
-  if (prevList) {
-    const movieIsInList = prevList.some(({ id }) => id === movieData.id);
-    if (movieIsInList) return;
+// function removeMovieFromList(idToRemove, listName) {
+//   const prevList = JSON.parse(localStorage.getItem(listName));
+//   if (!prevList) return;
 
-    newList = [...prevList, movieData];
-  } else {
-    newList = [movieData];
-  }
+//   const newList = prevList.filter(({ id }) => id !== idToRemove);
 
-  localStorage.setItem(listName, JSON.stringify(newList));
-}
+//   localStorage.setItem(listName, JSON.stringify(newList));
+// }
 
-function removeMovieFromList(idToRemove, listName) {
-  const prevList = JSON.parse(localStorage.getItem(listName));
-  if (!prevList) return;
-
-  const newList = prevList.filter(({ id }) => id !== idToRemove);
-  localStorage.setItem(listName, JSON.stringify(newList));
-}
-
-function checkMovieIsInList(movieId, listName) {
-  console.log(movieId);
-  const moviesList = JSON.parse(localStorage.getItem(listName));
-  const movieIsInList = moviesList.some(({ id }) => id === movieId);
-  return movieIsInList;
-}
+// function checkMovieIsInList(movieId, listName) {
+//   console.log(movieId);
+//   const moviesList = JSON.parse(localStorage.getItem(listName));
+//   const movieIsInList = moviesList.some(({ id }) => id === movieId);
+//   return movieIsInList;
+// }
