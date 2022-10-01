@@ -7,17 +7,7 @@ import { LS_QUEUE, LS_WATCHED } from './constants';
 import clickTeamModal from './team';
 import { modalAuthOpen } from './authentication';
 
-const refs = {
-  libraryMoviesContainer: document.querySelector('[data-user-library]'),
-  libraryMoviesPagination: document.querySelector(
-    '[data-user-library-pagination]'
-  ),
-  libraryWatchedBtn: document.querySelector('[data-library="watched"]'),
-  libraryQueueBtn: document.querySelector('[data-library="queue"]'),
-  emptyLibraryMessage: document.querySelector('[data-empty-message]'),
-  openModalBtn: document.querySelector('[data-modal-team-open]'),
-  closeModalBtn: document.querySelector('[data-modal-team-close]'),
-};
+import refs from './refs-library';
 
 refs.libraryWatchedBtn.addEventListener('click', onWatchedBtnClick);
 refs.libraryQueueBtn.addEventListener('click', onQueueBtnClick);
@@ -37,6 +27,10 @@ const userLibrary = new MoviesLibrary(
 userLibrary.storageName = LS_WATCHED;
 
 updateMoviesLibrary(userLibrary);
+
+document.body.classList.add('theme-light');
+
+refs.switcher.addEventListener('click', toggleTheme);
 
 function onMovieCardClick(e) {
   const targetEl = e.target.closest('li');
@@ -130,5 +124,32 @@ function hideEmptyLibraryMessage() {
   refs.emptyLibraryMessage.classList.add('visually-hidden');
 }
 
+
 const modalOpenBtnLibrary = document.querySelector('#modalOpenBtnLibrary');
 modalOpenBtnLibrary.addEventListener('click', modalAuthOpen);
+
+function toggleTheme() {
+  document.body.classList.toggle('theme-dark');
+  document.body.classList.toggle('theme-light');
+
+  setToLocalStorageTheme();
+}
+
+function setToLocalStorageTheme() {
+  if (document.body.classList.contains('theme-light')) {
+    document.getElementById('slider').checked = false;
+    localStorage.setItem('active-theme', '.theme-light');
+  } else if (document.body.classList.contains('theme-dark')) {
+    document.getElementById('slider').checked = true;
+    localStorage.setItem('active-theme', '.theme-dark');
+  }
+}
+
+infoFromLS();
+
+function infoFromLS() {
+  if (localStorage.getItem('active-theme') === '.theme-dark') {
+    toggleTheme();
+  }
+}
+

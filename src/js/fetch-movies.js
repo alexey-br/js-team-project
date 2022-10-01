@@ -15,7 +15,7 @@ refs.moviesContainer.addEventListener('click', onMovieCardClick);
 const tmdbService = new TMDB_Service();
 tmdbService.getGenres();
 
-getMovies();
+setTimeout(getMovies, 200);
 
 async function getMovies() {
   try {
@@ -52,7 +52,17 @@ function renderMovies(moviesData) {
     moviesData,
     tmdbService.genresMap
   );
-  refs.moviesContainer.innerHTML = createMoviesMarkup(decodedMoviesData);
+  refs.moviesContainer.innerHTML = createMoviesMarkup(
+    removeRaring(decodedMoviesData)
+  );
+}
+
+function removeRaring(moviesData) {
+  const noRatingData = moviesData.reduce(
+    (acc, movieData) => (acc = [...acc, { ...movieData, vote_average: 0 }]),
+    []
+  );
+  return noRatingData;
 }
 
 function onPaginationClick(e) {
