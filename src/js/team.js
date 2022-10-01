@@ -5,22 +5,20 @@ import refs from './refs';
 createTeamMarkup(teamCards);
 function createTeamMarkup(teamCards) {
   const markup = teamCardItem(teamCards);
-  return refs.teamContainer.innerHTML = markup;
+  return (refs.teamContainer.innerHTML = markup);
 }
 
 refs.openModalBtn.addEventListener('click', clickTeamModal);
 refs.closeModalBtn.addEventListener('click', clickTeamModal);
 
-function clickTeamModal(evt) {
+export default function clickTeamModal(evt) {
   evt.preventDefault();
   document.body.classList.toggle('modal-open');
   refs.teamModal.classList.toggle('is-hidden');
 }
 
-[...document.querySelectorAll(`.team__item`)].forEach((teamCard) => {
+[...document.querySelectorAll(`.team__item`)].forEach(teamCard => {
   teamCard.addEventListener('click', () => {
-      teamCard.classList.toggle('click-card');
-    });
+    teamCard.classList.toggle('click-card');
+  });
 });
-
-

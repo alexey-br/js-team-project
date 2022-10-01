@@ -4,6 +4,7 @@ import renderPagination from './render-pagination';
 import renderModal from './render-modal';
 import backToTop from './scroll-to-top';
 import { LS_QUEUE, LS_WATCHED } from './constants';
+import clickTeamModal from './team';
 
 const refs = {
   libraryMoviesContainer: document.querySelector('[data-user-library]'),
@@ -12,6 +13,9 @@ const refs = {
   ),
   libraryWatchedBtn: document.querySelector('[data-library="watched"]'),
   libraryQueueBtn: document.querySelector('[data-library="queue"]'),
+  emptyLibraryMessage: document.querySelector('[data-empty-message]'),
+  openModalBtn: document.querySelector('[data-modal-team-open]'),
+  closeModalBtn: document.querySelector('[data-modal-team-close]'),
 };
 
 refs.libraryWatchedBtn.addEventListener('click', onWatchedBtnClick);
@@ -21,6 +25,8 @@ refs.libraryMoviesPagination.addEventListener(
   'click',
   onMovieLibraryPaginationClick
 );
+refs.openModalBtn.addEventListener('click', clickTeamModal);
+refs.closeModalBtn.addEventListener('click', clickTeamModal);
 
 const userLibrary = new MoviesLibrary(
   refs.libraryMoviesContainer,
@@ -57,8 +63,12 @@ function updateMoviesLibrary(moviesLibrary) {
   const moviesList = JSON.parse(
     localStorage.getItem(moviesLibrary.storageName)
   );
-  if (!moviesList || moviesList.length < 1) return;
+  if (!moviesList || moviesList.length < 1) {
+    showEmptyLibraryMessage();
+    return;
+  }
 
+  hideEmptyLibraryMessage();
   moviesLibrary.render();
 
   if (moviesList.length > 20) {
@@ -109,4 +119,12 @@ function setQueueBtnActive() {
 function clearLibraryContainer() {
   refs.libraryMoviesContainer.innerHTML = '';
   refs.libraryMoviesPagination.innerHTML = '';
+}
+
+function showEmptyLibraryMessage() {
+  refs.emptyLibraryMessage.classList.remove('visually-hidden');
+}
+
+function hideEmptyLibraryMessage() {
+  refs.emptyLibraryMessage.classList.add('visually-hidden');
 }
