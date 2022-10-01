@@ -7,7 +7,7 @@ export default function createMoviesMarkup(moviesData) {
       normalizedMovieData;
 
     const rating = vote_average
-      ? `<span class="card__rating   ">${vote_average}</span>`
+      ? `<span class="card__rating   ">${vote_average.toFixed(1)}</span>`
       : '';
 
     return `${acc}
