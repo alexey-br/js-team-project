@@ -8,9 +8,6 @@ import clickTeamModal from './team';
 
 import refs from './refs-library';
 
-  refs.switcher: document.querySelector('.switcher-toggle'),
-
-
 refs.libraryWatchedBtn.addEventListener('click', onWatchedBtnClick);
 refs.libraryQueueBtn.addEventListener('click', onQueueBtnClick);
 refs.libraryMoviesContainer.addEventListener('click', onMovieCardClick);
@@ -31,7 +28,7 @@ userLibrary.storageName = LS_WATCHED;
 updateMoviesLibrary(userLibrary);
 
 document.body.classList.add('theme-light');
-  
+
 refs.switcher.addEventListener('click', toggleTheme);
 
 function onMovieCardClick(e) {
@@ -126,28 +123,27 @@ function hideEmptyLibraryMessage() {
   refs.emptyLibraryMessage.classList.add('visually-hidden');
 }
 
-
 function toggleTheme() {
-  document.body.classList.toggle("theme-dark");
-  document.body.classList.toggle("theme-light");
-  
-  setToLocalStorageTheme()
+  document.body.classList.toggle('theme-dark');
+  document.body.classList.toggle('theme-light');
+
+  setToLocalStorageTheme();
 }
 
-function setToLocalStorageTheme(){
+function setToLocalStorageTheme() {
   if (document.body.classList.contains('theme-light')) {
-      document.getElementById('slider').checked = false;
-      localStorage.setItem('active-theme', '.theme-light');
-    } else if (document.body.classList.contains('theme-dark')) {
-     document.getElementById('slider').checked = true;
-      localStorage.setItem('active-theme', '.theme-dark');
-    }
+    document.getElementById('slider').checked = false;
+    localStorage.setItem('active-theme', '.theme-light');
+  } else if (document.body.classList.contains('theme-dark')) {
+    document.getElementById('slider').checked = true;
+    localStorage.setItem('active-theme', '.theme-dark');
+  }
 }
 
 infoFromLS();
 
 function infoFromLS() {
-if (localStorage.getItem('active-theme') === '.theme-dark') {
-  toggleTheme();
-}
+  if (localStorage.getItem('active-theme') === '.theme-dark') {
+    toggleTheme();
+  }
 }
