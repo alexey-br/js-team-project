@@ -52,7 +52,17 @@ function renderMovies(moviesData) {
     moviesData,
     tmdbService.genresMap
   );
-  refs.moviesContainer.innerHTML = createMoviesMarkup(decodedMoviesData);
+  refs.moviesContainer.innerHTML = createMoviesMarkup(
+    removeRaring(decodedMoviesData)
+  );
+}
+
+function removeRaring(moviesData) {
+  noRatingData = moviesData.reduce(
+    (acc, movieData) => (acc = [...acc, { ...movieData, vote_average: 0 }]),
+    []
+  );
+  return noRatingData;
 }
 
 function onPaginationClick(e) {
