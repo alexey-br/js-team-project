@@ -86,7 +86,7 @@ async function registrationUser(evt) {
 }
 
 // модалка авторизації
-function modalAuthOpen() {
+export function modalAuthOpen() {
   renderAuthentication();
 
   window.addEventListener('keydown', escapeKeyCloseModal);
