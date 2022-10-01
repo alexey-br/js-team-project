@@ -12,7 +12,7 @@ import {
 import { checkMovieIsInList, toggleMovieInList } from './LS-service';
 
 export default function renderModal(movieDataToRender) {
-  const normalizedMovieData = normalizeMovieData(movieDataToRender);
+  const normalizedMovieData = normalizeMovieData(movieDataToRender, 10);
   const { id: movieId } = normalizedMovieData;
 
   const movieInWatched = checkMovieIsInList(movieId, LS_WATCHED);

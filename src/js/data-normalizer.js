@@ -13,7 +13,7 @@ export function decodeMoviesGenres(moviesData, genresMap) {
   return updatedMoviesData;
 }
 
-export function normalizeMovieData(movieData) {
+export function normalizeMovieData(movieData, genresNum) {
   let normalizedMovieData = { ...movieData };
   const { poster_path, release_date, genres } = normalizedMovieData;
 
@@ -27,7 +27,7 @@ export function normalizeMovieData(movieData) {
 
   if (genres.length === 0) {
     normalizedMovieData.genres = 'No genre';
-  } else if (genres.length < 4) {
+  } else if (genres.length <= genresNum) {
     normalizedMovieData.genres = genres.map(({ name }) => name).join(', ');
   } else {
     normalizedMovieData.genres = `${genres[0].name}, ${genres[1].name}, Other`;
