@@ -63,31 +63,31 @@ export default function renderModal(movieDataToRender) {
   addToQueueBtnRef.addEventListener('click', queueBtnAction);
 }
 
-function addMovieToList(movieData, listName) {
-  const prevList = JSON.parse(localStorage.getItem(listName));
-  let newList = [];
+// function addMovieToList(movieData, listName) {
+//   const prevList = JSON.parse(localStorage.getItem(listName));
+//   let newList = [];
 
-  if (prevList) {
-    newList = [...prevList, movieData];
-  } else {
-    newList = [movieData];
-  }
+//   if (prevList) {
+//     newList = [...prevList, movieData];
+//   } else {
+//     newList = [movieData];
+//   }
 
-  localStorage.setItem(listName, JSON.stringify(newList));
-}
+//   localStorage.setItem(listName, JSON.stringify(newList));
+// }
 
-function removeMovieFromList(idToRemove, listName) {
-  const prevList = JSON.parse(localStorage.getItem(listName));
-  if (!prevList) return;
+// function removeMovieFromList(idToRemove, listName) {
+//   const prevList = JSON.parse(localStorage.getItem(listName));
+//   if (!prevList) return;
 
-  const newList = prevList.filter(({ id }) => id !== idToRemove);
+//   const newList = prevList.filter(({ id }) => id !== idToRemove);
 
-  localStorage.setItem(listName, JSON.stringify(newList));
-}
+//   localStorage.setItem(listName, JSON.stringify(newList));
+// }
 
-function checkMovieIsInList(movieId, listName) {
-  console.log(movieId);
-  const moviesList = JSON.parse(localStorage.getItem(listName));
-  const movieIsInList = moviesList.some(({ id }) => id === movieId);
-  return movieIsInList;
-}
+// function checkMovieIsInList(movieId, listName) {
+//   console.log(movieId);
+//   const moviesList = JSON.parse(localStorage.getItem(listName));
+//   const movieIsInList = moviesList.some(({ id }) => id === movieId);
+//   return movieIsInList;
+// }
