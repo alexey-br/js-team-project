@@ -2,11 +2,11 @@ import * as basicLightbox from 'basiclightbox';
 import createModalMarkup from '../templates/modal-markup';
 import { normalizeMovieData } from './data-normalizer';
 import { LS_QUEUE, LS_WATCHED } from './constants';
-// import {
-//   checkMovieIsInList,
-//   addMovieToList,
-//   removeMovieFromList,
-// } from './LS-service';
+import {
+  checkMovieIsInList,
+  addMovieToList,
+  removeMovieFromList,
+} from './LS-service';
 
 export default function renderModal(movieDataToRender) {
   const normalizedMovieData = normalizeMovieData(movieDataToRender);

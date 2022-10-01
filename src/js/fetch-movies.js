@@ -40,6 +40,7 @@ async function onMovieCardClick(e) {
   try {
     const movieId = Number(targetEl.dataset.movieId);
     const movieData = await tmdbService.fetchMovie(movieId);
+    // console.log(movieData);
     renderModal(movieData);
   } catch (error) {
     console.log(error);
