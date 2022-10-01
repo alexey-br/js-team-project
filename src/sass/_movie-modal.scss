@@ -14,7 +14,6 @@
   will-change: opacity;
 }
 
-
 .basicLightbox--visible {
   opacity: 1;
 }
@@ -176,8 +175,6 @@
     align-items: start;
     margin: 0 70px 0 0;
     padding: 50px 20px 40px 20px;
-    
-    
   }
 }
 
@@ -193,7 +190,7 @@
   width: 100%;
 
   @media screen and (max-width: $tablet) {
-   max-width: 480px;
+    max-width: 480px;
   }
 
   @media screen and (min-width: $tablet) {
@@ -260,7 +257,6 @@
   justify-content: center;
   align-items: flex-start;
   padding: 20px;
-  
 
   @media screen and (max-width: $tablet) {
     max-width: 480px;
@@ -343,33 +339,33 @@
 }
 
 .modal__content {
-    line-height: 1.66;
-    // margin-bottom: 5px;
-    font-weight: 500;
-    font-size: 12px;
-    color: #000000;
-    height: 100px;
-    overflow: hidden;
-  
-    &:hover {
-      overflow-y: auto;
-      overflow-x: hidden;
-      -webkit-overflow-scrolling: touch;
-      -moz-overflow-scrolling: touch;
-      -ms-overflow-scrolling: touch;
-      -o-overflow-scrolling: touch;
-    }
-  
-    &::-webkit-scrollbar {
-      -webkit-appearance: none;
-      width: 7px;
-    }
-  
-    &::-webkit-scrollbar-thumb {
-      border-radius: 2px;
-      background-color: rgba(0, 0, 0, 0.5);
-    }
-    }
+  line-height: 1.66;
+  // margin-bottom: 5px;
+  font-weight: 500;
+  font-size: 12px;
+  color: #000000;
+  height: 100px;
+  overflow: hidden;
+
+  &:hover {
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    -moz-overflow-scrolling: touch;
+    -ms-overflow-scrolling: touch;
+    -o-overflow-scrolling: touch;
+  }
+
+  &::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
 .modal__button-wrap {
   display: flex;
   justify-content: center;
@@ -390,8 +386,7 @@
   padding: 0 5px;
   transition: all 250ms ease-in;
 
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: #ff6b01;
     color: #ffffff;
     border: 1px solid #ff6b01;

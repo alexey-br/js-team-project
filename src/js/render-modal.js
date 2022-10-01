@@ -1,12 +1,15 @@
 import * as basicLightbox from 'basiclightbox';
 import createModalMarkup from '../templates/modal-markup';
 import { normalizeMovieData } from './data-normalizer';
-import { LS_QUEUE, LS_WATCHED } from './constants';
 import {
-  checkMovieIsInList,
-  addMovieToList,
-  removeMovieFromList,
-} from './LS-service';
+  LS_QUEUE,
+  LS_WATCHED,
+  BTN_WATCHED_ADD,
+  BTN_WATCHED_REMOVE,
+  BTN_QUEUE_ADD,
+  BTN_QUEUE_REMOVE,
+} from './constants';
+import { checkMovieIsInList, toggleMovieInList } from './LS-service';
 
 export default function renderModal(movieDataToRender) {
   const normalizedMovieData = normalizeMovieData(movieDataToRender);
@@ -14,14 +17,6 @@ export default function renderModal(movieDataToRender) {
 
   const movieInWatched = checkMovieIsInList(movieId, LS_WATCHED);
   const movieInQueue = checkMovieIsInList(movieId, LS_QUEUE);
-
-  const watchedBtnAction = movieInWatched
-    ? () => removeMovieFromList(movieId, LS_WATCHED)
-    : () => addMovieToList(movieDataToRender, LS_WATCHED);
-
-  const queueBtnAction = movieInQueue
-    ? () => removeMovieFromList(movieId, LS_QUEUE)
-    : () => addMovieToList(movieDataToRender, LS_QUEUE);
 
   const modal = basicLightbox.create(
     createModalMarkup(normalizedMovieData, movieInWatched, movieInQueue),
@@ -59,35 +54,28 @@ export default function renderModal(movieDataToRender) {
   const addToWatchedBtnRef = document.querySelector('[data-watched]');
   const addToQueueBtnRef = document.querySelector('[data-queue]');
 
-  addToWatchedBtnRef.addEventListener('click', watchedBtnAction);
-  addToQueueBtnRef.addEventListener('click', queueBtnAction);
+  addToWatchedBtnRef.addEventListener('click', onWatchedBtnClick);
+  addToQueueBtnRef.addEventListener('click', onQueueBtnClick);
+
+  function onWatchedBtnClick(e) {
+    toggleMovieInList(movieDataToRender, LS_WATCHED);
+    toggleWatchedBtnLabel(e.target);
+  }
+
+  function onQueueBtnClick(e) {
+    toggleMovieInList(movieDataToRender, LS_QUEUE);
+    toggleQueueBtnLabel(e.target);
+  }
+
+  function toggleWatchedBtnLabel(btnRef) {
+    btnRef.textContent === BTN_WATCHED_ADD
+      ? (btnRef.textContent = BTN_WATCHED_REMOVE)
+      : (btnRef.textContent = BTN_WATCHED_ADD);
+  }
+
+  function toggleQueueBtnLabel(btnRef) {
+    btnRef.textContent === BTN_QUEUE_ADD
+      ? (btnRef.textContent = BTN_QUEUE_REMOVE)
+      : (btnRef.textContent = BTN_QUEUE_ADD);
+  }
 }
-
-// function addMovieToList(movieData, listName) {
-//   const prevList = JSON.parse(localStorage.getItem(listName));
-//   let newList = [];
-
-//   if (prevList) {
-//     newList = [...prevList, movieData];
-//   } else {
-//     newList = [movieData];
-//   }
-
-//   localStorage.setItem(listName, JSON.stringify(newList));
-// }
-
-// function removeMovieFromList(idToRemove, listName) {
-//   const prevList = JSON.parse(localStorage.getItem(listName));
-//   if (!prevList) return;
-
-//   const newList = prevList.filter(({ id }) => id !== idToRemove);
-
-//   localStorage.setItem(listName, JSON.stringify(newList));
-// }
-
-// function checkMovieIsInList(movieId, listName) {
-//   console.log(movieId);
-//   const moviesList = JSON.parse(localStorage.getItem(listName));
-//   const movieIsInList = moviesList.some(({ id }) => id === movieId);
-//   return movieIsInList;
-// }
