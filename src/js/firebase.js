@@ -4,6 +4,8 @@ import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { getAuth, signOut } from 'firebase/auth';
+import Notiflix from 'notiflix';
+
 export default class Firebase {
   constructor() {
     (this.firebaseConfig = {
@@ -18,62 +20,81 @@ export default class Firebase {
       // Initialize Firebase
       (this.app = initializeApp(this.firebaseConfig)),
       (this.auth = getAuth(this.app));
+    (this.savedSettings = localStorage.getItem('user')),
+      (this.user = JSON.parse(this.savedSettings)),
+      (this.errorCode = null),
+      (this.errorMessage = null);
   }
+
   // реєстрація користувачів
 
-  createUser(email, password) {
-    createUserWithEmailAndPassword(this.auth, email, password)
+  async createUser(email, password) {
+    await createUserWithEmailAndPassword(this.auth, email, password)
       .then(userCredential => {
-        // Signed in
         const user = userCredential.user;
-        console.log(user.uid);
-        // ...
+        localStorage.setItem('user', JSON.stringify(user));
+        Notiflix.Notify.success(
+          'Registration is successful, now you will be accompanied by the dog "Patron"'
+        );
       })
       .catch(error => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        // ..
+        Notiflix.Notify.failure(errorCode);
       });
   }
 
   // авторизація
 
-  signIn(email, password) {
-    signInWithEmailAndPassword(this.auth, email, password)
+  async signIn(email, password) {
+    await signInWithEmailAndPassword(this.auth, email, password)
       .then(userCredential => {
-        // Signed in
         const user = userCredential.user;
-        // ...
+        localStorage.setItem('user', JSON.stringify(user));
+        Notiflix.Notify.success(
+          'authorization is successful, now you will be accompanied by the dog "Patron"'
+        );
       })
       .catch(error => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        console.log('спрацював кетч');
+        this.errorCode = error.code;
+        Notiflix.Notify.failure(this.errorCode);
       });
   }
 
   //перевірка аутентифікації
   authState() {
-    onAuthStateChanged(this.auth, user => {
-      if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        const uid = user.uid;
-        // ...
-      } else {
-        // User is signed out
-        // ...
-      }
-    });
+    const user = this.auth.currentUser;
+
+    if (user) {
+      console.log('друга перевірка, знайдено:' + user);
+      localStorage.setItem('user', JSON.stringify(user));
+    } else {
+      console.log('друга перевірка, не знайдено:' + user);
+    }
   }
 
   // вихід з системи
-  out() {
-    signOut(this.auth)
+  async out() {
+    await signOut(this.auth)
       .then(() => {
+        localStorage.removeItem('user');
         // Sign-out successful.
       })
       .catch(error => {
         // An error happened.
       });
+  }
+
+  getUser() {
+    return this.user;
+  }
+
+  getErrorCode() {
+    return this.errorCode;
+  }
+
+  getErrorMessage() {
+    return this.errorMessage;
   }
 }
