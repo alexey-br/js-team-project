@@ -115,7 +115,8 @@ input:checked+.slider:before {
 }
 
 .theme-dark{
-    background-color: rgb(99, 98, 98);
+    background-image: url(../images/footer_svg/dark-honeycomb.png);
+    background-repeat: repeat;
 
     --primary-text-color: #d8d0d0;
     --accent-color: #ff6b08;
@@ -125,8 +126,8 @@ input:checked+.slider:before {
 
 
 .theme-light{
-    background-image: linear-gradient(to top, #eee4daf5, #bb885fdc);
-    background-size: cover;
+    background-image: url(../images/footer_svg/so-white.png);
+    background-repeat: repeat;
 }
 
 
