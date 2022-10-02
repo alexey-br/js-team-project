@@ -24,7 +24,9 @@ export default function createModalMarkup(movieData, isInWatched, isInQueue) {
   let votes = '<span>No votes</span>';
   if (vote_average > 0) {
     votes = `
-    <span class="modal__rating-right-item--color">${vote_average}</span> /
+    <span class="modal__rating-right-item--color">${vote_average.toFixed(
+      1
+    )}</span> /
     <span class="modal__rating-right-item--shadow">${vote_count}</span>`;
   }
 
@@ -55,7 +57,7 @@ export default function createModalMarkup(movieData, isInWatched, isInQueue) {
               <li class="modal__rating-right-item">
                 ${votes}
               </li>
-              <li class="modal__rating-right-item">${popularity}</li>
+              <li class="modal__rating-right-item">${popularity.toFixed(1)}</li>
               <li class="modal__rating-right-item modal__rating-right-item--uppercase">${original_title}</li>
               <li class="modal__rating-right-item">${genres}</li>
             </ul>
