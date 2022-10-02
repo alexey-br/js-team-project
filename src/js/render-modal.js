@@ -31,7 +31,6 @@ export default function renderModal(movieDataToRender, action) {
         window.removeEventListener('keydown', escapeKeyCloseModal);
         window.removeEventListener('click', clickForCloseModal);
         document.body.classList.toggle('modal-open');
-        if (action) action();
       },
     }
   );
@@ -61,11 +60,13 @@ export default function renderModal(movieDataToRender, action) {
   function onWatchedBtnClick(e) {
     toggleMovieInList(movieDataToRender, LS_WATCHED);
     toggleWatchedBtnLabel(e.target);
+    if (action) action();
   }
 
   function onQueueBtnClick(e) {
     toggleMovieInList(movieDataToRender, LS_QUEUE);
     toggleQueueBtnLabel(e.target);
+    if (action) action();
   }
 
   function toggleWatchedBtnLabel(btnRef) {
