@@ -130,4 +130,9 @@ input:checked+.slider:before {
     background-repeat: repeat;
 }
 
-
+.bank{
+    margin-right: auto;
+    position: absolute;
+   content: "";
+   left: 150px;
+}
