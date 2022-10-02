@@ -78,12 +78,14 @@ function updateMoviesLibrary(moviesLibrary) {
 function onWatchedBtnClick(e) {
   setWatchedBtnActive();
   userLibrary.storageName = LS_WATCHED;
+  userLibrary.page = 1;
   updateMoviesLibrary(userLibrary);
 }
 
 function onQueueBtnClick(e) {
   setQueueBtnActive();
   userLibrary.storageName = LS_QUEUE;
+  userLibrary.page = 1;
   updateMoviesLibrary(userLibrary);
 }
 
