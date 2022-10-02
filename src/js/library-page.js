@@ -40,7 +40,7 @@ function onMovieCardClick(e) {
 
   const movieData = getMovieDatafromLS(movieId, userLibrary);
 
-  renderModal(movieData);
+  renderModal(movieData, () => updateMoviesLibrary(userLibrary));
 }
 
 function getMovieDatafromLS(movieId, libraryName) {
@@ -124,7 +124,6 @@ function hideEmptyLibraryMessage() {
   refs.emptyLibraryMessage.classList.add('visually-hidden');
 }
 
-
 const modalOpenBtnLibrary = document.querySelector('#modalOpenBtnLibrary');
 modalOpenBtnLibrary.addEventListener('click', modalAuthOpen);
 
@@ -152,4 +151,3 @@ function infoFromLS() {
     toggleTheme();
   }
 }
-
