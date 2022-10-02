@@ -11,7 +11,7 @@ import {
 } from './constants';
 import { checkMovieIsInList, toggleMovieInList } from './LS-service';
 
-export default function renderModal(movieDataToRender) {
+export default function renderModal(movieDataToRender, action) {
   const normalizedMovieData = normalizeMovieData(movieDataToRender, 10);
   const { id: movieId } = normalizedMovieData;
 
@@ -31,6 +31,7 @@ export default function renderModal(movieDataToRender) {
         window.removeEventListener('keydown', escapeKeyCloseModal);
         window.removeEventListener('click', clickForCloseModal);
         document.body.classList.toggle('modal-open');
+        if (action) action();
       },
     }
   );
