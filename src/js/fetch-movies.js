@@ -4,7 +4,7 @@ import refs from './refs';
 import renderPagination from './render-pagination';
 import renderModal from './render-modal';
 import { decodeMoviesGenres } from './data-normalizer';
-import { showMessage, hideMessage } from './show-message';
+import showMessage from './show-message';
 import showSpinner from './spinner';
 import backToTop from './scroll-to-top';
 
@@ -84,7 +84,6 @@ function onSearch(e) {
   e.preventDefault();
   showSpinner();
 
-  hideMessage();
   const newQuery = e.currentTarget.searchQuery.value;
 
   tmdbService.query = newQuery.trim();
