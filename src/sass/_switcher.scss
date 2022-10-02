@@ -132,10 +132,21 @@ input:checked+.slider:before {
 
 .bank{
    position: absolute;
-   right: 60px;
+   right: 160px;
    top: 40px;
+@media screen and (max-width: $desktop) {
+        right: 100px;
+    }
+@media screen and (max-width: $tablet) {
+        right: 80px;
+    }
 @media screen and (max-width: $mobile){
     right: 20px; 
-    top: 10px; 
+    top: 30px; 
+}
+@media screen and (max-width: 320px) {
+    right: 10px; 
+    top: 100px; 
+    
 }
 }
